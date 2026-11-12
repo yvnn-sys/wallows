@@ -41,9 +41,11 @@ mysql -u root -p wallows < database/4_delete.sql
 ## Konfigurasi koneksi database
 
 1. Salin `config/koneksi.example.php` menjadi `config/koneksi.php`.
-2. Sesuaikan `$host`, `$port`, `$dbname`, `$username`, dan `$password` dengan
+2. Sesuaikan `$host`, `$username`, `$password`, dan `$database` dengan
    pengaturan MySQL Anda.
-3. File `config/koneksi.php` tidak di-commit karena berisi kredensial. Yang
+3. File `config/koneksi.php` memakai ekstensi `mysqli`, jadi variabel
+   koneksinya bernama `$koneksi`.
+4. File `config/koneksi.php` tidak di-commit karena berisi kredensial. Yang
    di-commit hanya file contohnya.
 
 ## Catatan

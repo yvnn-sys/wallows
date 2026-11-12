@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Dates | Wallows</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .tour-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 16px;
+            border-bottom: 1px solid var(--border);
+            border-radius: 10px;
+            transition: background 0.2s ease;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .tour-row:hover { background: rgba(255,255,255,0.03); }
+        .tour-date { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--ochre); min-width: 90px; }
+        .tour-info { flex: 1; }
+        .tour-location { font-size: 1.1rem; margin-bottom: 3px; }
+        .tour-venue { font-size: 0.9rem; color: var(--text-muted); }
+        @media (max-width: 600px) {
+            .tour-row { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+        <nav>
+        <a href="../index.html" class="logo">WALLOWS</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about/profile.html">About</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../about/profile.html">Profile</a></li>
+                    <li><a href="../about/members.html">Members</a></li>
+                    <li><a href="../about/contact.html">Contact</a></li>
+                </ul>
+            </li>
+            <li><a href="../music/albums.html">Music</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../music/albums.html">Albums</a></li>
+                    <li><a href="../music/songs.html">Popular Songs</a></li>
+                    <li><a href="../music/lyrics.html">Lyrics</a></li>
+                </ul>
+            </li>
+            <li><a href="../media/photos.html">Media</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../media/photos.html">Photos</a></li>
+                    <li><a href="../media/videos.html">Videos</a></li>
+                </ul>
+            </li>
+            <li><a href="../tour/schedule.html">Tour</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../tour/schedule.html">Schedule</a></li>
+                    <li><a href="../tour/tickets.html">Tickets</a></li>
+                </ul>
+            </li>
+            <li><a href="../store/merchandise.html">Store</a></li>
+            <li><a href="../news.html">News</a></li>
+        </ul>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="menu-toggle">☰</div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>WORLD TOUR ROADMAP</h1>
+        <p>Detailed itinerary, set times, and support acts for the Tell Me That It's Over World Tour.</p>
+    </header>
+
+    <section class="section fade-in-element" style="max-width: 900px;">
+        <!-- North American Leg -->
+        <div class="tour-leg-header">
+            <h2>North American Leg</h2>
+            <span class="support-act">Special Guests: BENEE & spill tab</span>
+        </div>
+
+        <div class="tour-row" data-concert-id="1" data-slug="los-angeles" data-date="2026-10-15" data-doors="18:30" data-show="20:00" data-age-limit="All Ages" data-sale-status="on_sale">
+            <div class="tour-date">OCT 15</div>
+            <div class="tour-info">
+                <div class="tour-location">Los Angeles, CA</div>
+                <div class="tour-venue">Greek Theatre</div>
+                <div class="tour-details-meta">Doors: 6:30 PM | Show: 8:00 PM · Age Limit: All Ages</div>
+            </div>
+            <a href="tickets.html?show=los-angeles#los-angeles" class="btn btn-outline-dark" style="padding:10px 24px; font-size:0.8rem;">Tickets & Packages</a>
+        </div>
+        <div class="tour-row" data-concert-id="2" data-slug="san-francisco" data-date="2026-10-18" data-doors="19:00" data-show="20:30" data-age-limit="All Ages" data-sale-status="selling_fast">
+            <div class="tour-date">OCT 18</div>
+            <div class="tour-info">
+                <div class="tour-location">San Francisco, CA</div>
+                <div class="tour-venue">Bill Graham Civic Auditorium</div>
+                <div class="tour-details-meta">Doors: 7:00 PM | Show: 8:30 PM · Age Limit: All Ages</div>
+            </div>
+            <a href="tickets.html?show=san-francisco#san-francisco" class="btn btn-outline-dark" style="padding:10px 24px; font-size:0.8rem;">Tickets & Packages</a>
+        </div>
+        <div class="tour-row" data-concert-id="3" data-slug="chicago" data-date="2026-10-22" data-doors="18:30" data-show="20:00" data-age-limit="18+ Only" data-sale-status="presale">
+            <div class="tour-date">OCT 22</div>
+            <div class="tour-info">
+                <div class="tour-location">Chicago, IL</div>
+                <div class="tour-venue">Aragon Ballroom</div>
+                <div class="tour-details-meta">Doors: 6:30 PM | Show: 8:00 PM · Age Limit: 18+ Only</div>
+            </div>
+            <a href="tickets.html?show=chicago#chicago" class="btn btn-outline-dark" style="padding:10px 24px; font-size:0.8rem;">Tickets & Packages</a>
+        </div>
+        <div class="tour-row" data-concert-id="4" data-slug="new-york" data-date="2026-10-25" data-doors="18:00" data-show="19:30" data-age-limit="All Ages" data-sale-status="on_sale">
+            <div class="tour-date">OCT 25</div>
+            <div class="tour-info">
+                <div class="tour-location">New York, NY</div>
+                <div class="tour-venue">Madison Square Garden</div>
+                <div class="tour-details-meta">Doors: 6:00 PM | Show: 7:30 PM · Age Limit: All Ages</div>
+            </div>
+            <a href="tickets.html?show=new-york#new-york" class="btn btn-outline-dark" style="padding:10px 24px; font-size:0.8rem;">Tickets & Packages</a>
+        </div>
+
+        <!-- European Leg -->
+        <div class="tour-leg-header" style="margin-top: 50px;">
+            <h2>European Leg</h2>
+            <span class="support-act">Special Guests: spill tab & Wallows Friends</span>
+        </div>
+
+        <div class="tour-row" data-concert-id="5" data-slug="london" data-date="2026-11-02" data-doors="19:00" data-show="20:30" data-age-limit="14+ (Under 16s with adult)" data-sale-status="sold_out">
+            <div class="tour-date">NOV 02</div>
+            <div class="tour-info">
+                <div class="tour-location">London, UK</div>
+                <div class="tour-venue">O2 Academy Brixton</div>
+                <div class="tour-details-meta">Doors: 7:00 PM | Show: 8:30 PM · Age Limit: 14+ (Under 16s with adult)</div>
+            </div>
+            <span style="padding:10px 24px; font-size:0.8rem; border:1px solid rgba(255,255,255,0.15); border-radius:var(--radius-sm); color:var(--text-light); text-transform: uppercase; font-weight: 600;">Sold Out</span>
+        </div>
+        <div class="tour-row" data-concert-id="6" data-slug="berlin" data-date="2026-11-08" data-doors="18:30" data-show="20:00" data-age-limit="All Ages" data-sale-status="on_sale">
+            <div class="tour-date">NOV 08</div>
+            <div class="tour-info">
+                <div class="tour-location">Berlin, Germany</div>
+                <div class="tour-venue">Columbiahalle</div>
+                <div class="tour-details-meta">Doors: 6:30 PM | Show: 8:00 PM · Age Limit: All Ages</div>
+            </div>
+            <a href="tickets.html?show=berlin#berlin" class="btn btn-outline-dark" style="padding:10px 24px; font-size:0.8rem;">Tickets & Packages</a>
+        </div>
+
+        <!-- Asian Leg -->
+        <div class="tour-leg-header" style="margin-top: 50px;">
+            <h2>Asian Leg</h2>
+            <span class="support-act">Special Guests: Local Support Acts TBA</span>
+        </div>
+
+        <div class="tour-row" data-concert-id="7" data-slug="tokyo" data-date="2026-11-15" data-doors="18:00" data-show="19:00" data-age-limit="All Ages" data-notes="1 Drink Required" data-sale-status="on_sale">
+            <div class="tour-date">NOV 15</div>
+            <div class="tour-info">
+                <div class="tour-location">Tokyo, Japan</div>
+                <div class="tour-venue">Zepp Shinjuku</div>
+                <div class="tour-details-meta">Doors: 6:00 PM | Show: 7:00 PM · Age Limit: All Ages (1 Drink Required)</div>
+            </div>
+            <a href="tickets.html?show=tokyo#tokyo" class="btn btn-outline-dark" style="padding:10px 24px; font-size:0.8rem;">Tickets & Packages</a>
+        </div>
+    </section>
+
+        <footer class="site-footer">
+        <div class="footer-social">
+            <a href="https://www.instagram.com/wallowsmusic/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/wallowsmusic" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.youtube.com/channel/UCjNGsoJEu1AnHiP7kOYiXCw" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://open.spotify.com/artist/0NIPkIjTV8mB795yEIiPYL" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Wallows. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Wallows</title>
+    <link rel="stylesheet" href="../style.css?v=6">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+        <nav>
+        <a href="../index.html" class="logo">WALLOWS</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about/profile.html">About</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../about/profile.html">Profile</a></li>
+                    <li><a href="../about/members.html">Members</a></li>
+                    <li><a href="../about/contact.html">Contact</a></li>
+                </ul>
+            </li>
+            <li><a href="../music/albums.html">Music</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../music/albums.html">Albums</a></li>
+                    <li><a href="../music/songs.html">Popular Songs</a></li>
+                    <li><a href="../music/lyrics.html">Lyrics</a></li>
+                </ul>
+            </li>
+            <li><a href="../media/photos.html">Media</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../media/photos.html">Photos</a></li>
+                    <li><a href="../media/videos.html">Videos</a></li>
+                </ul>
+            </li>
+            <li><a href="../tour/schedule.html">Tour</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../tour/schedule.html">Schedule</a></li>
+                    <li><a href="../tour/tickets.html">Tickets</a></li>
+                </ul>
+            </li>
+            <li><a href="../store/merchandise.html">Store</a></li>
+            <li><a href="../news.html">News</a></li>
+        </ul>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="menu-toggle">☰</div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>CONTACT</h1>
+        <p>Get in touch with the team behind Wallows.</p>
+    </header>
+
+    <section class="section fade-in-element" id="contact-unified">
+        <div class="modern-contact-wrap">
+            <h2 class="modern-contact-title">Contact us</h2>
+            <p class="modern-contact-subtitle">Get in touch and let us know how we can help</p>
+
+            <form id="contact-form" class="modern-contact-form" action="#" method="post">
+                <div class="form-row-2">
+                    <div class="form-group-modern">
+                        <input type="text" id="contact-name" name="name" maxlength="100" class="form-control-modern" placeholder="Name" required>
+                    </div>
+                    <div class="form-group-modern">
+                        <input type="email" id="contact-email" name="email" maxlength="150" class="form-control-modern" placeholder="E-mail" required>
+                    </div>
+                </div>
+                
+                <div class="form-group-modern">
+                    <select id="contact-topic" name="topic" class="form-control-modern" required>
+                        <option value="" disabled selected>Topic</option>
+                        <option value="Fan Message">Fan Message</option>
+                        <option value="Website Feedback">Website Feedback</option>
+                        <option value="Merch / Order Question">Merch / Order Question</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down select-icon"></i>
+                </div>
+
+                <div class="form-group-modern">
+                    <textarea id="contact-message" name="message" class="form-control-modern" placeholder="Your message" rows="4" maxlength="2000" required></textarea>
+                </div>
+
+
+
+                <button type="submit" class="modern-submit-btn">
+                    <span class="btn-text">Send Message</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div id="contact-form-success" class="success-container" style="display: none;">
+                <div class="success-icon">✓</div>
+                <h2>Message Sent!</h2>
+                <p>Thanks for reaching out. We'll get back to you at <strong id="contact-success-email">email@example.com</strong> as soon as we can.</p>
+                <button id="contact-success-close-btn" class="btn btn-outline-dark" style="width: 100%; margin-top: 24px;">Send Another Message</button>
+            </div>
+        </div>
+    </section>
+
+        <footer class="site-footer">
+        <div class="footer-social">
+            <a href="https://www.instagram.com/wallowsmusic/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/wallowsmusic" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.youtube.com/channel/UCjNGsoJEu1AnHiP7kOYiXCw" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://open.spotify.com/artist/0NIPkIjTV8mB795yEIiPYL" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Wallows. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

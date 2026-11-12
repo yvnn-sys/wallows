@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store | Wallows</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .price { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: bold; color: var(--ochre); margin-bottom: 20px; }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            min-height: 20px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 14px;
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid transparent;
+        }
+        .badge-empty {
+            visibility: hidden;
+        }
+        #product-grid .card h3 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.5em;
+        }
+        #product-grid .buy-btn {
+            margin-top: auto;
+        }
+        #product-grid .btn-primary {
+            border: 2px solid transparent;
+        }
+        .badge-new {
+            background: var(--ochre);
+            color: #121212;
+            border-color: rgba(215, 130, 94, 0.4);
+        }
+        .badge-limited {
+            background: #ffffff;
+            color: #121212;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+        .badge-bundle {
+            background: #6B9E8F;
+            color: #121212;
+            border-color: rgba(107, 158, 143, 0.4);
+        }
+        .card:hover .badge {
+            transform: scale(1.06) translateY(-2px);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+        <nav>
+        <a href="../index.html" class="logo">WALLOWS</a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about/profile.html">About</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../about/profile.html">Profile</a></li>
+                    <li><a href="../about/members.html">Members</a></li>
+                    <li><a href="../about/contact.html">Contact</a></li>
+                </ul>
+            </li>
+            <li><a href="../music/albums.html">Music</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../music/albums.html">Albums</a></li>
+                    <li><a href="../music/songs.html">Popular Songs</a></li>
+                    <li><a href="../music/lyrics.html">Lyrics</a></li>
+                </ul>
+            </li>
+            <li><a href="../media/photos.html">Media</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../media/photos.html">Photos</a></li>
+                    <li><a href="../media/videos.html">Videos</a></li>
+                </ul>
+            </li>
+            <li><a href="../tour/schedule.html">Tour</a>
+                <ul class="dropdown-menu">
+                    <li><a href="../tour/schedule.html">Schedule</a></li>
+                    <li><a href="../tour/tickets.html">Tickets</a></li>
+                </ul>
+            </li>
+            <li><a href="../store/merchandise.html">Store</a></li>
+            <li><a href="../news.html">News</a></li>
+        </ul>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div class="menu-toggle">☰</div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>OFFICIAL STORE</h1>
+        <p>Merchandise, vinyls, and exclusive apparel.</p>
+    </header>
+
+    <section class="section fade-in-element">
+        <div class="category-filter" data-category-filter data-target="#product-grid" role="group" aria-label="Filter products by category">
+            <button type="button" class="filter-chip is-active" data-filter="all" aria-pressed="true">All <span class="filter-count"></span></button>
+            <button type="button" class="filter-chip" data-filter="apparel" aria-pressed="false">Apparel <span class="filter-count"></span></button>
+            <button type="button" class="filter-chip" data-filter="vinyl" aria-pressed="false">Vinyl <span class="filter-count"></span></button>
+            <button type="button" class="filter-chip" data-filter="poster" aria-pressed="false">Poster <span class="filter-count"></span></button>
+            <button type="button" class="filter-chip" data-filter="accessories" aria-pressed="false">Accessories <span class="filter-count"></span></button>
+            <button type="button" class="filter-chip" data-filter="bundle" aria-pressed="false">Bundle <span class="filter-count"></span></button>
+        </div>
+
+        <div class="grid" id="product-grid">
+            <div class="card" data-product-id="1" data-category="apparel" style="text-align: center;">
+                <img src="https://media-photos.depop.com/b1/9904709/2642915748_2b41bfec7af54c8788a3a814e65c1d30/P0.jpg" alt="Tour Tee" onerror="this.style.display='none'">
+                <span class="badge badge-new">New</span>
+                <h3>Tell Me That It's Over Tour Tee</h3>
+                <p class="price">$35.00</p>
+                <button class="btn btn-outline-dark buy-btn" style="width:100%; display:block;" data-item-type="product" data-product-id="1" data-name="Tell Me That It's Over Tour Tee" data-price="35.00">Buy Now</button>
+            </div>
+
+            <div class="card" data-product-id="2" data-category="vinyl" style="text-align: center;">
+                <img src="https://tse2.mm.bing.net/th/id/OIP.dyvD7QVDEl6BkEVHAZ_I7AHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" onerror="this.style.display='none'">
+                <span class="badge badge-limited">Limited</span>
+                <h3>Model Exclusive Vinyl</h3>
+                <p class="price">$40.00</p>
+                <button class="btn btn-outline-dark buy-btn" style="width:100%; display:block;" data-item-type="product" data-product-id="2" data-name="Model Exclusive Vinyl" data-price="40.00">Buy Now</button>
+            </div>
+
+            <div class="card" data-product-id="3" data-category="apparel" style="text-align: center;">
+                <img src="https://uk.wallowsmusic.store/cdn/shop/files/Wallows---tour-french-navy-hoodie-front.png?v=1730385811&width=533" alt="Hoodie" onerror="this.style.display='none'">
+                <span class="badge badge-empty" aria-hidden="true"></span>
+                <h3>Wallows Logo Hoodie</h3>
+                <p class="price">$65.00</p>
+                <button class="btn btn-outline-dark buy-btn" style="width:100%; display:block;" data-item-type="product" data-product-id="3" data-name="Wallows Logo Hoodie" data-price="65.00">Buy Now</button>
+            </div>
+
+            <div class="card" data-product-id="4" data-category="poster" style="text-align: center;">
+                <img src="https://uk.wallowsmusic.store/cdn/shop/files/WAL-TOUR-POSTER.png?v=1730473815&width=1445" alt="Poster" onerror="this.style.display='none'">
+                <span class="badge badge-empty" aria-hidden="true"></span>
+                <h3>Model Tour Poster (Signed)</h3>
+                <p class="price">$25.00</p>
+                <button class="btn btn-outline-dark buy-btn" style="width:100%; display:block;" data-item-type="product" data-product-id="4" data-name="Model Tour Poster (Signed)" data-price="25.00">Buy Now</button>
+            </div>
+
+            <div class="card" data-product-id="5" data-category="accessories" style="text-align: center;">
+                <img src="https://uk.wallowsmusic.store/cdn/shop/files/Wallows-TMTIO-YellowCap.jpg?v=1708003714" alt="Hat" onerror="this.style.display='none'">
+                <span class="badge badge-empty" aria-hidden="true"></span>
+                <h3>Wallows Embroidered Cap</h3>
+                <p class="price">$28.00</p>
+                <button class="btn btn-outline-dark buy-btn" style="width:100%; display:block;" data-item-type="product" data-product-id="5" data-name="Wallows Embroidered Cap" data-price="28.00">Buy Now</button>
+            </div>
+
+            <div class="card" data-product-id="6" data-category="bundle" style="text-align: center;">
+                <img src="https://tse4.mm.bing.net/th/id/OIP.Xr8lfexVWYVk3aXpeX3M6wHaJ4?r=0&w=1080&h=1440&rs=1&pid=ImgDetMain&o=7&rm=3" onerror="this.style.display='none'">
+                <span class="badge badge-bundle">Bundle</span>
+                <h3>Fan Bundle — Vinyl + Tee + Poster</h3>
+                <p class="price">$90.00</p>
+                <button class="btn btn-primary buy-btn" style="width:100%; display:block;" data-item-type="product" data-product-id="6" data-name="Fan Bundle — Vinyl + Tee + Poster" data-price="90.00">Buy Now</button>
+            </div>
+        </div>
+        <div class="category-empty" data-filter-empty>No products in this category yet.</div>
+    </section>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="checkout-form-container">
+                <div class="modal-header">
+                    <h2>Checkout</h2>
+                    <p id="modal-product-title">Product Name</p>
+                    <p id="modal-product-price" class="modal-price">$0.00</p>
+                </div>
+                <form id="checkout-form" action="#" method="post">
+                    <input type="hidden" name="item_type" id="checkout-item-type" value="">
+                    <input type="hidden" name="product_id" id="checkout-product-id" value="">
+                    <input type="hidden" name="concert_ticket_id" id="checkout-concert-ticket-id" value="">
+                    <div class="form-group">
+                        <label for="checkout-name" class="form-label">Full Name</label>
+                        <input type="text" id="checkout-name" name="customer_name" class="form-control" placeholder="YOUR NAME" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-email" class="form-label">Email Address</label>
+                        <input type="email" id="checkout-email" name="customer_email" class="form-control" placeholder="YOUR EMAIL" maxlength="150" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout-quantity" class="form-label">Quantity</label>
+                        <input type="number" id="checkout-quantity" name="quantity" class="form-control" value="1" min="1" max="10" required>
+                    </div>
+                    <div class="form-group" id="checkout-address-group">
+                        <label for="checkout-address" class="form-label">Delivery Address</label>
+                        <textarea id="checkout-address" name="shipping_address" class="form-control" placeholder="YOUR SHIPPING ADDRESS" required></textarea>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" id="checkout-create-account" name="create_account" value="1">
+                        <label for="checkout-create-account">Create an account with this email (optional)</label>
+                    </div>
+                    <div class="form-group" id="checkout-password-group" style="display: none;">
+                        <label for="checkout-password" class="form-label">Password</label>
+                        <input type="password" id="checkout-password" name="password" class="form-control" placeholder="MIN. 8 CHARACTERS" minlength="8" autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Place Order</button>
+                </form>
+            </div>
+            <div id="checkout-success" class="success-container" style="display: none;">
+                <div class="success-icon">✓</div>
+                <h2>Order Placed!</h2>
+                <p>Thank you for your purchase. A confirmation email has been sent to <strong id="success-email">email@example.com</strong>.</p>
+                <button id="success-close-btn" class="btn btn-outline-dark" style="width: 100%; margin-top: 24px;">Continue Shopping</button>
+            </div>
+        </div>
+    </div>
+
+        <footer class="site-footer">
+        <div class="footer-social">
+            <a href="https://www.instagram.com/wallowsmusic/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/wallowsmusic" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.youtube.com/channel/UCjNGsoJEu1AnHiP7kOYiXCw" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://open.spotify.com/artist/0NIPkIjTV8mB795yEIiPYL" target="_blank" rel="noopener"><i class="fa-brands fa-spotify"></i></a>
+        </div>
+        <p class="footer-copy">&copy; 2026 Wallows. All Rights Reserved.</p>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
+

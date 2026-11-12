@@ -38,6 +38,14 @@ mysql -u root -p wallows < database/3_update.sql
 mysql -u root -p wallows < database/4_delete.sql
 ```
 
+## Konfigurasi koneksi database
+
+1. Salin `config/koneksi.example.php` menjadi `config/koneksi.php`.
+2. Sesuaikan `$host`, `$port`, `$dbname`, `$username`, dan `$password` dengan
+   pengaturan MySQL Anda.
+3. File `config/koneksi.php` tidak di-commit karena berisi kredensial. Yang
+   di-commit hanya file contohnya.
+
 ## Catatan
 
 - Data di `1_insert.sql` adalah data contoh untuk latihan, bukan data resmi.

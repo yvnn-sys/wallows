@@ -48,6 +48,23 @@ mysql -u root -p wallows < database/4_delete.sql
 4. File `config/koneksi.php` tidak di-commit karena berisi kredensial. Yang
    di-commit hanya file contohnya.
 
+## Panel admin
+
+1. Pastikan `config/koneksi.php` sudah ada dan database `wallows` bisa diakses.
+2. Buat akun admin dari terminal:
+
+   ```bash
+   php tools/buat_admin.php "Nama Admin" admin@example.com
+   ```
+
+   Skrip akan membuat sandi acak dan menampilkannya satu kali. Jika ingin
+   menentukan sandi sendiri, tambahkan sebagai argumen ketiga (minimal 8
+   karakter). Sandi disimpan sebagai hash, bukan teks asli.
+3. Buka folder `admin/` lewat server lokal, misalnya
+   `http://localhost/wallows-s/admin/`.
+4. Halaman yang sudah tersedia: login, dashboard ringkasan, dan logout.
+   Modul CRUD akan ditambahkan pada tahap berikutnya.
+
 ## Catatan
 
 - Data di `1_insert.sql` adalah data contoh untuk latihan, bukan data resmi.

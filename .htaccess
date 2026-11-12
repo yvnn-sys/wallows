@@ -1,0 +1,10 @@
+# Lindungi folder internal dari akses web.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?:\.git|config|tools|database)(?:/|$) - [F,L]
+</IfModule>
+
+# Tolak permintaan ke file tersembunyi seperti .git dan .env.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

@@ -103,11 +103,44 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                     </li>
 
                     <li class="nav-header">KONSER &amp; MUSIK</li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                    <?php $tabKonser = $tab ?? ''; ?>
+                    <li class="nav-item <?= $activeMenu === 'konser_tiket' ? 'menu-open' : '' ?>">
+                        <a
+                            href="<?= e(ADMIN_URL) ?>/konser_tiket.php"
+                            class="nav-link <?= $activeMenu === 'konser_tiket' ? 'active' : '' ?>"
+                        >
                             <i class="nav-icon bi bi-ticket-perforated"></i>
-                            <p>Konser &amp; Tiket <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>
+                                Konser &amp; Tiket
+                                <i class="nav-arrow bi bi-chevron-right"></i>
+                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="<?= e(ADMIN_URL) ?>/konser_tiket.php?tab=konser" class="nav-link <?= $activeMenu === 'konser_tiket' && $tabKonser === 'konser' ? 'active' : '' ?>">
+                                    <i class="nav-icon bi bi-calendar-event"></i>
+                                    <p>Jadwal Konser</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= e(ADMIN_URL) ?>/konser_tiket.php?tab=tiket" class="nav-link <?= $activeMenu === 'konser_tiket' && $tabKonser === 'tiket' ? 'active' : '' ?>">
+                                    <i class="nav-icon bi bi-upc-scan"></i>
+                                    <p>Tiket &amp; Kuota</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= e(ADMIN_URL) ?>/konser_tiket.php?tab=jenis" class="nav-link <?= $activeMenu === 'konser_tiket' && $tabKonser === 'jenis' ? 'active' : '' ?>">
+                                    <i class="nav-icon bi bi-tags"></i>
+                                    <p>Jenis Tiket</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= e(ADMIN_URL) ?>/konser_tiket.php?tab=bagian" class="nav-link <?= $activeMenu === 'konser_tiket' && $tabKonser === 'bagian' ? 'active' : '' ?>">
+                                    <i class="nav-icon bi bi-map"></i>
+                                    <p>Bagian Tur</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link disabled" aria-disabled="true">

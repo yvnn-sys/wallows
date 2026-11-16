@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 11, 2026 at 06:17 AM
+-- Generation Time: Nov 16, 2026 at 06:14 AM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.33
 
@@ -33,6 +33,13 @@ CREATE TABLE `admin` (
   `email` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kata_sandi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'disimpan dalam bentuk hash'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Akun untuk login ke panel pengelola';
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `nama`, `email`, `kata_sandi`) VALUES
+(5, 'admin', 'yovanandreann@gmail.com', '$2y$10$XsVdwf9Str6icbinJGAReurQpy79u8Z4896eOuNEqnNBtVi7bQ0lS');
 
 -- --------------------------------------------------------
 
@@ -476,7 +483,7 @@ ALTER TABLE `video`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `album`

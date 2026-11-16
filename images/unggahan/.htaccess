@@ -1,0 +1,7 @@
+# Folder ini hanya untuk gambar hasil unggahan admin.
+Options -Indexes
+
+# Tolak akses ke berkas yang bisa dieksekusi server.
+<FilesMatch "\.(php|phtml|php[0-9]|phps|pl|py|cgi|sh|htaccess)$">
+    Require all denied
+</FilesMatch>

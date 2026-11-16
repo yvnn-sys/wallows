@@ -93,15 +93,15 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/produk/index.php" class="nav-link <?= $activeMenu === 'produk' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-bag"></i>
-                            <p>Produk <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Produk</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/pesanan/index.php" class="nav-link <?= $activeMenu === 'pesanan' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-receipt"></i>
-                            <p>Pesanan <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Pesanan</p>
                         </a>
                     </li>
 
@@ -169,9 +169,9 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
 
                     <li class="nav-header">PENGGUNA</li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/admin/index.php" class="nav-link <?= $activeMenu === 'admin' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-person-gear"></i>
-                            <p>Admin <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Admin</p>
                         </a>
                     </li>
                 </ul>

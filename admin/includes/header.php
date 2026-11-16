@@ -84,9 +84,9 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/pesan_kontak/index.php" class="nav-link <?= $activeMenu === 'pesan_kontak' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-chat-dots"></i>
-                            <p>Pesan Kontak <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Pesan Kontak</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -149,15 +149,15 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/foto/index.php" class="nav-link <?= $activeMenu === 'galeri' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-images"></i>
-                            <p>Galeri <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Galeri</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/anggota/index.php" class="nav-link <?= $activeMenu === 'anggota' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-people"></i>
-                            <p>Anggota <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Anggota</p>
                         </a>
                     </li>
 

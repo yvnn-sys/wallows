@@ -16,5 +16,15 @@ if (!defined('ADMIN_URL')) {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?= e(BASE_PATH) ?>/dist/js/adminlte.min.js"></script>
+<script>
+    document.querySelectorAll('form[data-konfirmasi]').forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            var pesan = form.getAttribute('data-konfirmasi') || 'Yakin ingin melanjutkan?';
+            if (!window.confirm(pesan)) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 </body>
 </html>

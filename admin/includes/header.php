@@ -78,9 +78,12 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
 
                     <li class="nav-header">KONTEN</li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a
+                            href="<?= e(ADMIN_URL) ?>/modul/berita/index.php"
+                            class="nav-link <?= $activeMenu === 'berita' ? 'active' : '' ?>"
+                        >
                             <i class="nav-icon bi bi-newspaper"></i>
-                            <p>Berita <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Berita</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -110,9 +113,12 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a
+                            href="<?= e(ADMIN_URL) ?>/modul/album/index.php"
+                            class="nav-link <?= $activeMenu === 'musik' ? 'active' : '' ?>"
+                        >
                             <i class="nav-icon bi bi-music-note-beamed"></i>
-                            <p>Musik <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Musik</p>
                         </a>
                     </li>
                     <li class="nav-item">

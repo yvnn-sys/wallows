@@ -305,11 +305,11 @@ function url_gambar(?string $path, string $bawaan = ''): string
         return $bawaan;
     }
 
-    if (preg_match('#^https?://#i', $path) === 1) {
+    if (preg_match('#^(https?:)?//#i', $path) === 1) {
         return $path;
     }
 
-    return BASE_PATH . '/' . ltrim($path, '/');
+    return BASE_PATH . '/' . ltrim(str_replace('\\', '/', $path), '/');
 }
 
 /**

@@ -129,23 +129,6 @@ function proses_upload_gambar(array $file, string $awalan): array
 }
 
 /**
- * URL publik untuk gambar yang tersimpan di basis data.
- */
-function url_gambar(?string $path): string
-{
-    $path = trim((string) $path);
-    if ($path === '') {
-        return '';
-    }
-
-    if (preg_match('#^(https?:)?//#i', $path)) {
-        return $path;
-    }
-
-    return BASE_PATH . '/' . ltrim(str_replace('\\', '/', $path), '/');
-}
-
-/**
  * Hapus hanya berkas yang berada di folder unggahan aplikasi.
  */
 function hapus_gambar_upload(?string $path): void

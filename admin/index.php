@@ -26,6 +26,7 @@ if ($hasilJumlah !== null) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Masuk &middot; <?= e(APP_NAME) ?></title>
+    <link rel="icon" type="image/svg+xml" href="<?= e(BASE_PATH) ?>/images/favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="<?= e(BASE_PATH) ?>/dist/css/adminlte.min.css">

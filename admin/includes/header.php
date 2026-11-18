@@ -14,6 +14,7 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($pageTitle) ?> &middot; <?= e(APP_NAME) ?></title>
+<link rel="icon" type="image/svg+xml" href="<?= e(BASE_PATH) ?>/images/favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="<?= e(BASE_PATH) ?>/dist/css/adminlte.min.css">
@@ -30,7 +31,7 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                     </a>
                 </li>
                 <li class="nav-item d-none d-md-block">
-                    <a href="<?= e(BASE_PATH) ?>/index.html" class="nav-link" target="_blank" rel="noopener">
+                    <a href="<?= e(BASE_PATH) ?>/index.php" class="nav-link" target="_blank" rel="noopener">
                         <i class="bi bi-box-arrow-up-right me-1"></i> Lihat situs
                     </a>
                 </li>

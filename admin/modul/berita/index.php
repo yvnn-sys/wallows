@@ -570,7 +570,7 @@ require __DIR__ . '/../../includes/header.php';
                             name="tautan_tombol"
                             maxlength="255"
                             value="<?= e($nilai['tautan_tombol']) ?>"
-                            placeholder="https://... atau tour/schedule.html"
+                            placeholder="https://... atau tour/schedule.php"
                         >
                     </div>
                 </div>

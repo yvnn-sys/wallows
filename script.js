@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 3. Active Nav Link (Polished)
-    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const currentPath = window.location.pathname.split("/").pop() || "index.php";
     document.querySelectorAll(".nav-links > li").forEach(li => {
         const parentLink = li.querySelector("a");
         const allLinks = li.querySelectorAll("a");
@@ -75,6 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }, observerOptions);
 
             fadeElements.forEach(el => fadeObserver.observe(el));
+
+            // Jaring pengaman: kalau observer belum sempat jalan, konten tetap ditampilkan.
+            window.setTimeout(() => {
+                fadeElements.forEach(el => el.classList.add("visible"));
+            }, 1200);
         } else {
             fadeElements.forEach(el => el.classList.add("visible"));
         }
@@ -190,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let activeTicketPackages = null;
         let unitPrice = 0;
-        const formatPrice = (value) => "$" + value.toFixed(2);
+        const formatPrice = (value) => "Rp " + Math.round(value).toLocaleString("id-ID");
         const updateTotal = () => {
             const qty = Math.max(1, parseInt(quantityInput.value, 10) || 1);
             modalProductPrice.textContent = formatPrice(unitPrice * qty);
@@ -367,32 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 7. Contact Page Fan Message Form
-    const contactForm = document.getElementById("contact-form");
-    if (contactForm) {
-        const contactSuccess = document.getElementById("contact-form-success");
-        const contactSuccessEmail = document.getElementById("contact-success-email");
-        const contactSuccessCloseBtn = document.getElementById("contact-success-close-btn");
-
-        contactForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const emailInput = document.getElementById("contact-email").value;
-            contactSuccessEmail.textContent = emailInput;
-
-            contactForm.style.display = "none";
-            contactSuccess.style.display = "block";
-        });
-
-        if (contactSuccessCloseBtn) {
-            contactSuccessCloseBtn.addEventListener("click", () => {
-                contactForm.reset();
-                contactForm.style.display = "block";
-                contactSuccess.style.display = "none";
-            });
-        }
-    }
-
-    // 8. Mode show-only saat datang dari schedule
+    // 7. Mode show-only saat datang dari schedule
     const showSlug = new URLSearchParams(window.location.search).get("show");
     const showCard = showSlug ? document.getElementById(showSlug) : null;
     const validShowCard = showCard && showCard.classList.contains("ticket-card") ? showCard : null;
@@ -434,7 +414,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 9. Filter kategori untuk galeri foto dan toko
+    // 8. Filter kategori untuk galeri foto dan toko
     document.querySelectorAll("[data-category-filter]").forEach(filterBar => {
         const targetSelector = filterBar.getAttribute("data-target");
         const grid = targetSelector ? document.querySelector(targetSelector) : null;
@@ -500,7 +480,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 10. Modal lirik lengkap
+    // 9. Modal lirik lengkap
     const lyricsModal = document.getElementById("lyrics-modal");
 
     if (lyricsModal) {

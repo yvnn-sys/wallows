@@ -107,9 +107,14 @@ function tautan_halaman(?string $tautan): string
     return BASE_URL . '/' . ltrim($tautan, '/');
 }
 
-function rupiah($angka): string
+function usd($angka): string
 {
-    return 'Rp ' . number_format((float) $angka, 0, ',', '.');
+    return '$' . number_format((float) $angka, 2, '.', ',');
+}
+
+function usd_input($angka): string
+{
+    return number_format((float) $angka, 2, '.', '');
 }
 
 function format_tanggal(?string $waktu, string $format = 'd M Y'): string

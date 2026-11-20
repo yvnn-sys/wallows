@@ -26,6 +26,7 @@ $nilai = $lama ?? [
     'status_aktif' => 1,
 ];
 $errors = [];
+$hargaTampil = $lama !== null ? usd_input($lama['harga']) : '0.00';
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $token = $_POST['csrf_token'] ?? null;
@@ -37,6 +38,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $nama = trim(input_teks('nama'));
     $kategoriId = input_int('kategori_produk_id');
     $hargaMentah = trim(input_teks('harga'));
+    $hargaTampil = $hargaMentah;
     $stokMentah = trim(input_teks('stok'));
     $label = input_pilihan('label_produk', ['new', 'limited'], null);
     $statusAktif = isset($_POST['status_aktif']) ? 1 : 0;
@@ -180,7 +182,7 @@ require __DIR__ . '/../../includes/header.php';
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="harga" class="form-label">Harga (Rp)</label>
+                            <label for="harga" class="form-label">Harga (USD)</label>
                             <input
                                 id="harga"
                                 name="harga"
@@ -188,7 +190,7 @@ require __DIR__ . '/../../includes/header.php';
                                 min="0"
                                 step="0.01"
                                 class="form-control<?= kelas_error($errors, 'harga') ?>"
-                                value="<?= e((string) $nilai['harga']) ?>"
+                                value="<?= e($hargaTampil) ?>"
                                 required
                             >
                             <?= pesan_error($errors, 'harga') ?>

@@ -197,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let activeTicketPackages = null;
         let unitPrice = 0;
-        const formatPrice = (value) => "Rp " + Math.round(value).toLocaleString("id-ID");
+        const formatPrice = (value) => "$" + Number(value || 0).toFixed(2);
         const updateTotal = () => {
             const qty = Math.max(1, parseInt(quantityInput.value, 10) || 1);
             modalProductPrice.textContent = formatPrice(unitPrice * qty);

@@ -141,7 +141,7 @@ require __DIR__ . '/../../includes/header.php';
                                 <div><?= e($namaTampil) ?></div>
                                 <div class="small text-secondary"><?= e($emailTampil) ?></div>
                             </td>
-                            <td class="text-end"><?= e(rupiah($baris['total_harga'])) ?></td>
+                            <td class="text-end"><?= e(usd($baris['total_harga'])) ?></td>
                             <td><?= badge_status((string) $baris['status']) ?></td>
                             <td><?= e(tanggal_singkat($baris['dibuat_pada'])) ?></td>
                             <td class="text-end">

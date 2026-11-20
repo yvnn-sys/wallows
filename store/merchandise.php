@@ -154,7 +154,7 @@ require __DIR__ . '/../includes/header.php';
                         <?php endif; ?>
                         <span class="badge <?= e($kelasBadge) ?>" <?= $labelBadge === '' ? 'aria-hidden="true"' : '' ?>><?= e($labelBadge) ?></span>
                         <h3><?= e($produk['nama']) ?></h3>
-                        <p class="price"><?= e(rupiah($produk['harga'])) ?></p>
+                        <p class="price"><?= e(usd($produk['harga'])) ?></p>
                         <?php if ($adaStok): ?>
                             <button
                                 class="btn <?= e($kelasTombol) ?> buy-btn"
@@ -181,7 +181,7 @@ require __DIR__ . '/../includes/header.php';
                 <div class="modal-header">
                     <h2>Checkout</h2>
                     <p id="modal-product-title">Product Name</p>
-                    <p id="modal-product-price" class="modal-price">Rp 0</p>
+                    <p id="modal-product-price" class="modal-price">$0.00</p>
                 </div>
                 <form id="checkout-form" action="<?= e(url_halaman('proses_checkout.php')) ?>" method="post">
                     <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">

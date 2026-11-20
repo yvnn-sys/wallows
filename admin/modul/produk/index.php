@@ -113,7 +113,7 @@ require __DIR__ . '/../../includes/header.php';
                             </td>
                             <td class="fw-semibold"><?= e($baris['nama']) ?></td>
                             <td><?= e($baris['kategori']) ?></td>
-                            <td class="text-end"><?= e(rupiah($baris['harga'])) ?></td>
+                            <td class="text-end"><?= e(usd($baris['harga'])) ?></td>
                             <td class="text-center">
                                 <?php if ((int) $baris['stok'] < 10): ?>
                                     <span class="badge text-bg-danger"><?= (int) $baris['stok'] ?></span>

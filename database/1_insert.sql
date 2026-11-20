@@ -114,34 +114,34 @@ INSERT INTO `konser` (`id`, `bagian_tur_id`, `nama_tempat`, `kota`, `wilayah`, `
 -- 14. tiket_konser
 -- konser_id mengacu ke konser, jenis_tiket_id mengacu ke jenis_tiket
 INSERT INTO `tiket_konser` (`id`, `konser_id`, `jenis_tiket_id`, `harga`, `kuota`, `terjual`) VALUES
-(1, 1, 1, 750000.00, 500, 130),
-(2, 1, 2, 1500000.00, 100, 40),
-(3, 2, 1, 800000.00, 400, 55),
-(4, 3, 1, 600000.00, 300, 20),
-(5, 3, 2, 1200000.00, 80, 10);
+(1, 1, 1, 46.88, 500, 130),
+(2, 1, 2, 93.75, 100, 40),
+(3, 2, 1, 50.00, 400, 55),
+(4, 3, 1, 37.50, 300, 20),
+(5, 3, 2, 75.00, 80, 10);
 
 -- 15. produk
 -- kategori_produk_id mengacu ke tabel kategori_produk
 INSERT INTO `produk` (`id`, `nama`, `kategori_produk_id`, `harga`, `stok`, `tautan_gambar`, `label_produk`, `status_aktif`) VALUES
-(1, 'Tell Me That It''s Over Tour Tee', 1, 250000.00, 40, 'https://media-photos.depop.com/b1/9904709/2642915748_2b41bfec7af54c8788a3a814e65c1d30/P0.jpg', 'new', 1),
-(2, 'Model Exclusive Vinyl', 2, 450000.00, 25, 'images/turntable_vinyl.png', 'limited', 1),
-(3, 'Model Tour Poster (Signed)', 3, 120000.00, 60, 'images/home4.jpg', NULL, 1),
-(4, 'Wallows Embroidered Cap', 4, 150000.00, 80, 'https://images.unsplash.com/photo-1521369909029-2afed882baee?q=80&w=1000&auto=format&fit=crop', NULL, 1),
-(5, 'Fan Bundle — Vinyl + Tee + Poster', 5, 650000.00, 15, 'https://tse4.mm.bing.net/th/id/OIP.Xr8lfexVWYVk3aXpeX3M6wHaJ4?r=0&w=1080&h=1440&rs=1&pid=ImgDetMain&o=7&rm=3', NULL, 1);
+(1, 'Tell Me That It''s Over Tour Tee', 1, 15.63, 40, 'https://media-photos.depop.com/b1/9904709/2642915748_2b41bfec7af54c8788a3a814e65c1d30/P0.jpg', 'new', 1),
+(2, 'Model Exclusive Vinyl', 2, 28.13, 25, 'images/turntable_vinyl.png', 'limited', 1),
+(3, 'Model Tour Poster (Signed)', 3, 7.50, 60, 'images/home4.jpg', NULL, 1),
+(4, 'Wallows Embroidered Cap', 4, 9.38, 80, 'https://images.unsplash.com/photo-1521369909029-2afed882baee?q=80&w=1000&auto=format&fit=crop', NULL, 1),
+(5, 'Fan Bundle — Vinyl + Tee + Poster', 5, 40.63, 15, 'https://tse4.mm.bing.net/th/id/OIP.Xr8lfexVWYVk3aXpeX3M6wHaJ4?r=0&w=1080&h=1440&rs=1&pid=ImgDetMain&o=7&rm=3', NULL, 1);
 
 -- 16. pesanan
 -- pelanggan_id boleh kosong untuk pembeli tanpa akun
 INSERT INTO `pesanan` (`id`, `pelanggan_id`, `nomor_pesanan`, `nama_pelanggan`, `email_pelanggan`, `alamat_pengiriman`, `total_harga`, `status`, `dibuat_pada`) VALUES
-(1, 1, 'ORD-2026-0001', 'Rani Putri', 'rani@example.com', 'Jalan Merdeka 1, Bandung', 700000.00, 'paid', '2026-11-03 13:00:00'),
-(2, NULL, 'ORD-2026-0002', 'Budi Santoso', 'budi@example.com', NULL, 2250000.00, 'pending', '2026-11-04 14:15:00');
+(1, 1, 'ORD-2026-0001', 'Rani Putri', 'rani@example.com', 'Jalan Merdeka 1, Bandung', 43.75, 'paid', '2026-11-03 13:00:00'),
+(2, NULL, 'ORD-2026-0002', 'Budi Santoso', 'budi@example.com', NULL, 140.63, 'pending', '2026-11-04 14:15:00');
 
 -- 17. item_pesanan
 -- Mengacu ke pesanan, produk, dan tiket_konser
 INSERT INTO `item_pesanan` (`id`, `pesanan_id`, `produk_id`, `tiket_konser_id`, `nama_item`, `harga_satuan`, `jumlah`, `kode_tiket`) VALUES
-(1, 1, 1, NULL, 'Kaos Nothing Happens', 250000.00, 1, NULL),
-(2, 1, 2, NULL, 'Vinyl Nothing Happens', 450000.00, 1, NULL),
-(3, 2, NULL, 1, 'Tiket Standard - Madison Square Garden', 750000.00, 1, 'TIX-0001'),
-(4, 2, NULL, 2, 'Tiket VIP - Madison Square Garden', 1500000.00, 1, 'TIX-0002');
+(1, 1, 1, NULL, 'Kaos Nothing Happens', 15.63, 1, NULL),
+(2, 1, 2, NULL, 'Vinyl Nothing Happens', 28.13, 1, NULL),
+(3, 2, NULL, 1, 'Tiket Standard - Madison Square Garden', 46.88, 1, 'TIX-0001'),
+(4, 2, NULL, 2, 'Tiket VIP - Madison Square Garden', 93.75, 1, 'TIX-0002');
 
 -- 18. video
 -- lagu_id boleh kosong jika video tidak terikat lagu tertentu

@@ -104,7 +104,7 @@ require __DIR__ . '/../../includes/header.php';
                     <dd class="col-sm-8"><?= e(tanggal_singkat($pesanan['dibuat_pada'])) ?></dd>
 
                     <dt class="col-sm-4">Total</dt>
-                    <dd class="col-sm-8 fw-semibold"><?= e(rupiah($pesanan['total_harga'])) ?></dd>
+                    <dd class="col-sm-8 fw-semibold"><?= e(usd($pesanan['total_harga'])) ?></dd>
                 </dl>
             </div>
         </div>
@@ -143,7 +143,7 @@ require __DIR__ . '/../../includes/header.php';
                                             <div class="small text-secondary">Kode tiket: <?= e($baris['kode_tiket']) ?></div>
                                         <?php endif; ?>
                                     </td>
-                                    <td class="text-end"><?= e(rupiah($baris['harga_satuan'])) ?></td>
+                                    <td class="text-end"><?= e(usd($baris['harga_satuan'])) ?></td>
                                     <td class="text-center">
                                         <?php if ($bisaUbahItem): ?>
                                             <form method="post" action="item_proses.php" class="d-flex justify-content-center gap-1">
@@ -158,7 +158,7 @@ require __DIR__ . '/../../includes/header.php';
                                             <?= (int) $baris['jumlah'] ?>
                                         <?php endif; ?>
                                     </td>
-                                    <td class="text-end"><?= e(rupiah((float) $baris['harga_satuan'] * (int) $baris['jumlah'])) ?></td>
+                                    <td class="text-end"><?= e(usd((float) $baris['harga_satuan'] * (int) $baris['jumlah'])) ?></td>
                                     <td class="text-end">
                                         <?php if ($bisaUbahItem): ?>
                                             <form method="post" action="item_proses.php" onsubmit="return confirm('Hapus item ini?');">
@@ -179,7 +179,7 @@ require __DIR__ . '/../../includes/header.php';
                     <tfoot>
                         <tr>
                             <th colspan="3" class="text-end">Total</th>
-                            <th class="text-end"><?= e(rupiah($pesanan['total_harga'])) ?></th>
+                            <th class="text-end"><?= e(usd($pesanan['total_harga'])) ?></th>
                             <th></th>
                         </tr>
                     </tfoot>
@@ -198,7 +198,7 @@ require __DIR__ . '/../../includes/header.php';
                                 <option value="">&mdash; Pilih produk &mdash;</option>
                                 <?php foreach ($produkPilihan as $produk): ?>
                                     <option value="<?= (int) $produk['id'] ?>">
-                                        <?= e($produk['nama']) ?> &mdash; <?= e(rupiah($produk['harga'])) ?> (stok <?= (int) $produk['stok'] ?>)
+                                        <?= e($produk['nama']) ?> &mdash; <?= e(usd($produk['harga'])) ?> (stok <?= (int) $produk['stok'] ?>)
                                     </option>
                                 <?php endforeach; ?>
                             </select>

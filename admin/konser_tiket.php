@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $id = (int) ($_POST['id'] ?? 0);
                 $konserId = (int) ($_POST['konser_id'] ?? 0);
                 $jenisTiketId = (int) ($_POST['jenis_tiket_id'] ?? 0);
-                $harga = usd_ke_rupiah(str_replace(',', '.', (string) ($_POST['harga'] ?? '0')));
+                $harga = (float) str_replace(',', '.', (string) ($_POST['harga'] ?? '0'));
                 $kuota = (int) ($_POST['kuota'] ?? 0);
                 $terjual = (int) ($_POST['terjual'] ?? 0);
 

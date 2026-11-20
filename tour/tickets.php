@@ -123,7 +123,7 @@ require __DIR__ . '/../includes/header.php';
                             <div class="package-badge <?= $premium ? 'premium' : '' ?>" style="display: inline-block;"><?= e($labelBadge) ?></div>
                             <h3><?= e($paket['nama']) ?></h3>
                             <p class="package-price" style="font-size: 1.4rem; margin-bottom: 15px;">
-                                <?= $paket['harga_min'] !== null ? 'from ' . e(rupiah($paket['harga_min'])) : 'Price TBA' ?>
+                                <?= $paket['harga_min'] !== null ? 'from ' . e(usd($paket['harga_min'])) : 'Price TBA' ?>
                             </p>
                             <p style="color: var(--text-muted); font-size: 0.9rem;"><?= nl2br(e($paket['deskripsi'])) ?></p>
                         </div>
@@ -245,7 +245,7 @@ require __DIR__ . '/../includes/header.php';
                 <div class="modal-header">
                     <h2>Checkout</h2>
                     <p id="modal-product-title">Product Name</p>
-                    <p id="modal-product-price" class="modal-price">Rp 0</p>
+                    <p id="modal-product-price" class="modal-price">$0.00</p>
                 </div>
                 <form id="checkout-form" action="<?= e(url_halaman('proses_checkout.php')) ?>" method="post">
                     <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">

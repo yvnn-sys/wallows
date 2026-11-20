@@ -87,21 +87,14 @@ function safe_query(mysqli $koneksi, string $sql): ?mysqli_result
     }
 }
 
-const KURS_USD = 16000;
-
 function usd($angka): string
 {
-    return '$' . number_format((float) $angka / KURS_USD, 2, '.', ',');
+    return '$' . number_format((float) $angka, 2, '.', ',');
 }
 
 function usd_input($angka): string
 {
-    return number_format((float) $angka / KURS_USD, 2, '.', '');
-}
-
-function usd_ke_rupiah($nilai): float
-{
-    return round((float) $nilai * KURS_USD, 2);
+    return number_format((float) $angka, 2, '.', '');
 }
 
 function tanggal_singkat(?string $waktu): string

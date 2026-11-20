@@ -247,7 +247,8 @@ require __DIR__ . '/../includes/header.php';
                     <p id="modal-product-title">Product Name</p>
                     <p id="modal-product-price" class="modal-price">Rp 0</p>
                 </div>
-                <form id="checkout-form" action="#" method="post">
+                <form id="checkout-form" action="<?= e(url_halaman('proses_checkout.php')) ?>" method="post">
+                    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
                     <input type="hidden" name="item_type" id="checkout-item-type" value="">
                     <input type="hidden" name="product_id" id="checkout-product-id" value="">
                     <input type="hidden" name="concert_ticket_id" id="checkout-concert-ticket-id" value="">
@@ -299,13 +300,14 @@ require __DIR__ . '/../includes/header.php';
                         <label for="checkout-password" class="form-label">Password</label>
                         <input type="password" id="checkout-password" name="password" class="form-control" placeholder="MIN. 8 CHARACTERS" minlength="8" autocomplete="new-password">
                     </div>
+                    <div id="checkout-error" style="display:none; color:#e08484; margin: 0 0 12px;"></div>
                     <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;">Place Order</button>
                 </form>
             </div>
             <div id="checkout-success" class="success-container" style="display: none;">
                 <div class="success-icon">✓</div>
                 <h2>Order Placed!</h2>
-                <p>Thank you for your purchase. A confirmation email has been sent to <strong id="success-email">email@example.com</strong>.</p>
+                <p>Thank you for your purchase. Order <strong id="success-order-number">-</strong> has been received and is waiting for confirmation. We will contact you at <strong id="success-email">email@example.com</strong>.</p>
                 <button id="success-close-btn" class="btn btn-outline-dark" style="width: 100%; margin-top: 24px;">Continue Shopping</button>
             </div>
         </div>

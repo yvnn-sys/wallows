@@ -28,8 +28,8 @@ function sesuaikan_total_pesanan(mysqli $koneksi, int $pesananId): void
 }
 
 /**
- * Kembalikan stok produk untuk seluruh item pesanan. Harus dipanggil di
- * dalam transaksi yang sama dengan perubahan status pesanan.
+ * Kembalikan stok produk dan kuota tiket untuk seluruh item pesanan. Harus
+ * dipanggil di dalam transaksi yang sama dengan perubahan status pesanan.
  */
 function kembalikan_stok_pesanan(mysqli $koneksi, int $pesananId): void
 {
@@ -47,6 +47,23 @@ function kembalikan_stok_pesanan(mysqli $koneksi, int $pesananId): void
             $koneksi,
             'UPDATE produk SET stok = stok + ? WHERE id = ?',
             [(int) $item['jumlah'], (int) $item['produk_id']]
+        );
+    }
+
+    $tiket = db_semua(
+        $koneksi,
+        'SELECT tiket_konser_id, SUM(jumlah) AS jumlah
+         FROM item_pesanan
+         WHERE pesanan_id = ? AND tiket_konser_id IS NOT NULL
+         GROUP BY tiket_konser_id',
+        [$pesananId]
+    );
+
+    foreach ($tiket as $item) {
+        db_jalankan(
+            $koneksi,
+            'UPDATE tiket_konser SET terjual = GREATEST(0, terjual - ?) WHERE id = ?',
+            [(int) $item['jumlah'], (int) $item['tiket_konser_id']]
         );
     }
 }

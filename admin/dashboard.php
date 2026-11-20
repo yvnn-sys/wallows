@@ -81,7 +81,7 @@ require __DIR__ . '/includes/header.php';
                 <p>Pesanan menunggu</p>
             </div>
             <i class="small-box-icon bi bi-receipt"></i>
-            <span class="small-box-footer">Modul pesanan segera <i class="bi bi-clock"></i></span>
+            <a href="<?= e(ADMIN_URL) ?>/modul/pesanan/index.php" class="small-box-footer">Lihat pesanan <i class="bi bi-arrow-right-circle"></i></a>
         </div>
     </div>
 
@@ -103,7 +103,7 @@ require __DIR__ . '/includes/header.php';
                 <p>Pesan baru</p>
             </div>
             <i class="small-box-icon bi bi-chat-dots"></i>
-            <span class="small-box-footer">Modul pesan segera <i class="bi bi-clock"></i></span>
+            <a href="<?= e(ADMIN_URL) ?>/modul/pesan_kontak/index.php" class="small-box-footer">Buka pesan <i class="bi bi-arrow-right-circle"></i></a>
         </div>
     </div>
 

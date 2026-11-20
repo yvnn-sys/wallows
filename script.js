@@ -169,7 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const checkoutFormContainer = document.getElementById("checkout-form-container");
         const checkoutSuccess = document.getElementById("checkout-success");
         const successEmail = document.getElementById("success-email");
+        const successOrderNumber = document.getElementById("success-order-number");
         const successCloseBtn = document.getElementById("success-close-btn");
+        const checkoutError = document.getElementById("checkout-error");
 
         const modalProductTitle = document.getElementById("modal-product-title");
         const modalProductPrice = document.getElementById("modal-product-price");
@@ -291,6 +293,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             checkoutFormContainer.style.display = "block";
             checkoutSuccess.style.display = "none";
+            if (successOrderNumber) successOrderNumber.textContent = "-";
+            if (checkoutError) {
+                checkoutError.textContent = "";
+                checkoutError.style.display = "none";
+            }
 
             modal.classList.add("active");
             document.body.style.overflow = "hidden"; // Prevent background scroll
@@ -362,13 +369,49 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Handle form submit (tahap backend: kirim FormData ke endpoint pembuatan pesanan)
-        checkoutForm.addEventListener("submit", (e) => {
+        checkoutForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            successEmail.textContent = document.getElementById("checkout-email").value;
 
-            checkoutFormContainer.style.display = "none";
-            checkoutSuccess.style.display = "block";
+            if (checkoutError) {
+                checkoutError.textContent = "";
+                checkoutError.style.display = "none";
+            }
+
+            const tombolKirim = checkoutForm.querySelector('button[type="submit"]');
+            const labelTombol = tombolKirim ? tombolKirim.textContent : "";
+
+            if (tombolKirim) {
+                tombolKirim.disabled = true;
+                tombolKirim.textContent = "Processing...";
+            }
+
+            try {
+                const response = await fetch(checkoutForm.action, {
+                    method: "POST",
+                    body: new FormData(checkoutForm),
+                    headers: { "X-Requested-With": "XMLHttpRequest" }
+                });
+                const hasil = await response.json().catch(() => null);
+
+                if (!response.ok || !hasil || !hasil.ok) {
+                    throw new Error((hasil && hasil.message) || "Pesanan gagal diproses. Silakan coba lagi.");
+                }
+
+                successEmail.textContent = document.getElementById("checkout-email").value;
+                if (successOrderNumber) successOrderNumber.textContent = hasil.nomor_pesanan;
+                checkoutFormContainer.style.display = "none";
+                checkoutSuccess.style.display = "block";
+            } catch (error) {
+                if (checkoutError) {
+                    checkoutError.textContent = error instanceof Error ? error.message : "Pesanan gagal diproses.";
+                    checkoutError.style.display = "block";
+                }
+            } finally {
+                if (tombolKirim) {
+                    tombolKirim.disabled = false;
+                    tombolKirim.textContent = labelTombol;
+                }
+            }
         });
     }
 

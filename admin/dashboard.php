@@ -88,7 +88,7 @@ require __DIR__ . '/includes/header.php';
     <div class="col-lg-3 col-6">
         <div class="small-box text-bg-success">
             <div class="inner">
-                <h3 class="fs-4"><?= e(rupiah($ringkasan['pendapatan'])) ?></h3>
+                <h3 class="fs-4"><?= e(usd($ringkasan['pendapatan'])) ?></h3>
                 <p>Pendapatan tercatat</p>
             </div>
             <i class="small-box-icon bi bi-cash-coin"></i>
@@ -151,7 +151,7 @@ require __DIR__ . '/includes/header.php';
                                 <tr>
                                     <td><?= e($pesanan['nomor_pesanan']) ?></td>
                                     <td><?= e($pesanan['nama_pelanggan']) ?></td>
-                                    <td><?= e(rupiah($pesanan['total_harga'])) ?></td>
+                                    <td><?= e(usd($pesanan['total_harga'])) ?></td>
                                     <td><?= badge_status((string) $pesanan['status']) ?></td>
                                     <td><?= e(tanggal_singkat($pesanan['dibuat_pada'])) ?></td>
                                 </tr>

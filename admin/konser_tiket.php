@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $id = (int) ($_POST['id'] ?? 0);
                 $konserId = (int) ($_POST['konser_id'] ?? 0);
                 $jenisTiketId = (int) ($_POST['jenis_tiket_id'] ?? 0);
-                $harga = (float) str_replace(',', '.', (string) ($_POST['harga'] ?? '0'));
+                $harga = usd_ke_rupiah(str_replace(',', '.', (string) ($_POST['harga'] ?? '0')));
                 $kuota = (int) ($_POST['kuota'] ?? 0);
                 $terjual = (int) ($_POST['terjual'] ?? 0);
 
@@ -497,7 +497,7 @@ require __DIR__ . '/includes/header.php';
     <div class="col-lg-3 col-6">
         <div class="small-box text-bg-warning">
             <div class="inner">
-                <h3 class="fs-4"><?= e(rupiah($ringkasan['pendapatan'])) ?></h3>
+                <h3 class="fs-4"><?= e(usd($ringkasan['pendapatan'])) ?></h3>
                 <p>Pendapatan tiket</p>
             </div>
             <i class="small-box-icon bi bi-cash-coin"></i>
@@ -808,7 +808,7 @@ require __DIR__ . '/includes/header.php';
                                 </div>
 
                                 <div class="col-md-4 mb-3">
-                                    <label class="form-label" for="tiket_harga">Harga (Rp)</label>
+                                    <label class="form-label" for="tiket_harga">Harga (USD)</label>
                                     <input
                                         type="number"
                                         class="form-control"
@@ -816,7 +816,7 @@ require __DIR__ . '/includes/header.php';
                                         name="harga"
                                         min="0"
                                         step="0.01"
-                                        value="<?= e((string) ($editTiket['harga'] ?? '')) ?>"
+                                        value="<?= e($editTiket !== null ? usd_input($editTiket['harga']) : '') ?>"
                                         required
                                     >
                                 </div>
@@ -919,7 +919,7 @@ require __DIR__ . '/includes/header.php';
                                         <div><?= badge_kategori_tiket((string) $tiket['kategori']) ?></div>
                                         <div class="small"><?= e($tiket['jenis_nama']) ?></div>
                                     </td>
-                                    <td class="text-nowrap"><?= e(rupiah($tiket['harga'])) ?></td>
+                                    <td class="text-nowrap"><?= e(usd($tiket['harga'])) ?></td>
                                     <td><?= number_format($kuota, 0, ',', '.') ?></td>
                                     <td><?= number_format($terjual, 0, ',', '.') ?></td>
                                     <td>

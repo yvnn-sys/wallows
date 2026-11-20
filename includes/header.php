@@ -18,7 +18,8 @@ $gayaHalaman = $gayaHalaman ?? '';
     <meta name="description" content="<?= e($deskripsiHalaman) ?>">
     <script>document.documentElement.classList.add('js');</script>
     <link rel="icon" type="image/svg+xml" href="<?= e(url_halaman('images/favicon.svg')) ?>">
-    <link rel="stylesheet" href="<?= e(url_halaman('style.css')) ?>">
+    <?php $versiGaya = @filemtime(dirname(__DIR__) . '/style.css') ?: time(); ?>
+    <link rel="stylesheet" href="<?= e(url_halaman('style.css')) ?>?v=<?= e((string) $versiGaya) ?>">
     <?php if ($gayaHalaman !== ''): ?>
         <style>
 <?= $gayaHalaman ?>

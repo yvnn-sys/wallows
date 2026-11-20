@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../includes/auth.php';
+require_once __DIR__ . '/fungsi.php';
 
 $tujuan = ADMIN_URL . '/modul/pesanan/index.php';
 
@@ -14,7 +15,7 @@ if (!is_string($token) || !csrf_valid($token)) {
 }
 
 $id = input_int('id');
-$pesanan = $id > 0 ? db_satu($koneksi, 'SELECT id FROM pesanan WHERE id = ?', [$id]) : null;
+$pesanan = $id > 0 ? db_satu($koneksi, 'SELECT id, status FROM pesanan WHERE id = ?', [$id]) : null;
 
 if ($pesanan === null) {
     flash_set('gagal', 'Pesanan tidak ditemukan.');
@@ -24,6 +25,10 @@ if ($pesanan === null) {
 $koneksi->begin_transaction();
 
 try {
+    if ($pesanan['status'] !== 'cancelled') {
+        kembalikan_stok_pesanan($koneksi, $id);
+    }
+
     db_jalankan($koneksi, 'DELETE FROM item_pesanan WHERE pesanan_id = ?', [$id]);
     db_jalankan($koneksi, 'DELETE FROM pesanan WHERE id = ?', [$id]);
     $koneksi->commit();

@@ -15,7 +15,8 @@ if (!defined('BASE_URL')) {
         <p class="footer-copy">&copy; 2026 Wallows. All Rights Reserved.</p>
     </footer>
 
-    <script src="<?= e(url_halaman('script.js')) ?>"></script>
+    <?php $versiScript = @filemtime(dirname(__DIR__) . '/script.js') ?: time(); ?>
+    <script src="<?= e(url_halaman('script.js')) ?>?v=<?= e((string) $versiScript) ?>"></script>
 </body>
 
 </html>

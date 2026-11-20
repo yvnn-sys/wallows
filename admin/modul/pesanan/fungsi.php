@@ -28,6 +28,62 @@ function sesuaikan_total_pesanan(mysqli $koneksi, int $pesananId): void
 }
 
 /**
+ * Sesuaikan stok produk atau kuota tiket saat jumlah item berubah.
+ * Nilai delta positif menambah pemakaian, negatif mengembalikan pemakaian.
+ * Harus dipanggil di dalam transaksi.
+ */
+function sesuaikan_pemakaian_item(mysqli $koneksi, ?int $produkId, ?int $tiketId, int $delta): void
+{
+    if ($delta === 0) {
+        return;
+    }
+
+    if ($produkId !== null) {
+        if ($delta > 0) {
+            $info = db_jalankan(
+                $koneksi,
+                'UPDATE produk SET stok = stok - ? WHERE id = ? AND stok >= ?',
+                [$delta, $produkId, $delta]
+            );
+        } else {
+            $info = db_jalankan(
+                $koneksi,
+                'UPDATE produk SET stok = stok + ? WHERE id = ?',
+                [-$delta, $produkId]
+            );
+        }
+
+        if ($info['terpengaruh'] !== 1) {
+            throw new RuntimeException('Stok produk tidak mencukupi.');
+        }
+
+        return;
+    }
+
+    if ($tiketId === null) {
+        return;
+    }
+
+    if ($delta > 0) {
+        $info = db_jalankan(
+            $koneksi,
+            'UPDATE tiket_konser SET terjual = terjual + ? WHERE id = ? AND kuota - terjual >= ?',
+            [$delta, $tiketId, $delta]
+        );
+
+        if ($info['terpengaruh'] !== 1) {
+            throw new RuntimeException('Kuota tiket tidak mencukupi.');
+        }
+    } else {
+        db_jalankan(
+            $koneksi,
+            'UPDATE tiket_konser SET terjual = GREATEST(0, terjual - ?) WHERE id = ?',
+            [-$delta, $tiketId]
+        );
+    }
+}
+
+/**
  * Kembalikan stok produk dan kuota tiket untuk seluruh item pesanan. Harus
  * dipanggil di dalam transaksi yang sama dengan perubahan status pesanan.
  */

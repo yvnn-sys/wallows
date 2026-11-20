@@ -53,6 +53,8 @@ try {
             throw new RuntimeException('Produk tidak ditemukan.');
         }
 
+        sesuaikan_pemakaian_item($koneksi, (int) $produk['id'], null, $jumlah);
+
         db_jalankan(
             $koneksi,
             'INSERT INTO item_pesanan (pesanan_id, produk_id, tiket_konser_id, nama_item, harga_satuan, jumlah, kode_tiket)
@@ -66,12 +68,22 @@ try {
         flash_set('sukses', 'Item berhasil ditambahkan.');
     } elseif ($aksi === 'ubah') {
         $item = $itemId > 0
-            ? db_satu($koneksi, 'SELECT id FROM item_pesanan WHERE id = ? AND pesanan_id = ?', [$itemId, $pesananId])
+            ? db_satu(
+                $koneksi,
+                'SELECT id, produk_id, tiket_konser_id, jumlah FROM item_pesanan WHERE id = ? AND pesanan_id = ?',
+                [$itemId, $pesananId]
+            )
             : null;
 
         if ($item === null) {
             throw new RuntimeException('Item pesanan tidak ditemukan.');
         }
+
+        $selisih = $jumlah - (int) $item['jumlah'];
+        $produkId = $item['produk_id'] !== null ? (int) $item['produk_id'] : null;
+        $tiketId = $item['tiket_konser_id'] !== null ? (int) $item['tiket_konser_id'] : null;
+
+        sesuaikan_pemakaian_item($koneksi, $produkId, $tiketId, $selisih);
 
         db_jalankan($koneksi, 'UPDATE item_pesanan SET jumlah = ? WHERE id = ? AND pesanan_id = ?', [$jumlah, $itemId, $pesananId]);
         sesuaikan_total_pesanan($koneksi, $pesananId);
@@ -79,6 +91,23 @@ try {
 
         flash_set('sukses', 'Jumlah item berhasil diperbarui.');
     } else {
+        $item = $itemId > 0
+            ? db_satu(
+                $koneksi,
+                'SELECT id, produk_id, tiket_konser_id, jumlah FROM item_pesanan WHERE id = ? AND pesanan_id = ?',
+                [$itemId, $pesananId]
+            )
+            : null;
+
+        if ($item === null) {
+            throw new RuntimeException('Item pesanan tidak ditemukan.');
+        }
+
+        $produkId = $item['produk_id'] !== null ? (int) $item['produk_id'] : null;
+        $tiketId = $item['tiket_konser_id'] !== null ? (int) $item['tiket_konser_id'] : null;
+
+        sesuaikan_pemakaian_item($koneksi, $produkId, $tiketId, -(int) $item['jumlah']);
+
         db_jalankan($koneksi, 'DELETE FROM item_pesanan WHERE id = ? AND pesanan_id = ?', [$itemId, $pesananId]);
         sesuaikan_total_pesanan($koneksi, $pesananId);
         $koneksi->commit();

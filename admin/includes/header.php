@@ -14,6 +14,7 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= e($pageTitle) ?> &middot; <?= e(APP_NAME) ?></title>
+<link rel="icon" type="image/svg+xml" href="<?= e(BASE_PATH) ?>/images/favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="<?= e(BASE_PATH) ?>/dist/css/adminlte.min.css">
@@ -30,7 +31,7 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                     </a>
                 </li>
                 <li class="nav-item d-none d-md-block">
-                    <a href="<?= e(BASE_PATH) ?>/index.html" class="nav-link" target="_blank" rel="noopener">
+                    <a href="<?= e(BASE_PATH) ?>/index.php" class="nav-link" target="_blank" rel="noopener">
                         <i class="bi bi-box-arrow-up-right me-1"></i> Lihat situs
                     </a>
                 </li>
@@ -78,9 +79,12 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
 
                     <li class="nav-header">KONTEN</li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a
+                            href="<?= e(ADMIN_URL) ?>/modul/berita/index.php"
+                            class="nav-link <?= $activeMenu === 'berita' ? 'active' : '' ?>"
+                        >
                             <i class="nav-icon bi bi-newspaper"></i>
-                            <p>Berita <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Berita</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -90,15 +94,15 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/produk/index.php" class="nav-link <?= $activeMenu === 'produk' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-bag"></i>
-                            <p>Produk <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Produk</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/pesanan/index.php" class="nav-link <?= $activeMenu === 'pesanan' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-receipt"></i>
-                            <p>Pesanan <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Pesanan</p>
                         </a>
                     </li>
 
@@ -143,9 +147,12 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a
+                            href="<?= e(ADMIN_URL) ?>/modul/album/index.php"
+                            class="nav-link <?= $activeMenu === 'musik' ? 'active' : '' ?>"
+                        >
                             <i class="nav-icon bi bi-music-note-beamed"></i>
-                            <p>Musik <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Musik</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -163,9 +170,9 @@ $adminNama = $_SESSION['admin_nama'] ?? 'Admin';
 
                     <li class="nav-header">PENGGUNA</li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link disabled" aria-disabled="true">
+                        <a href="<?= e(ADMIN_URL) ?>/modul/admin/index.php" class="nav-link <?= $activeMenu === 'admin' ? 'active' : '' ?>">
                             <i class="nav-icon bi bi-person-gear"></i>
-                            <p>Admin <span class="nav-badge badge text-bg-secondary me-2">segera</span></p>
+                            <p>Admin</p>
                         </a>
                     </li>
                 </ul>

@@ -18,6 +18,11 @@ $basePath = $posisiAdmin === false ? '' : substr($scriptName, 0, $posisiAdmin);
 define('BASE_PATH', $basePath);
 define('ADMIN_URL', $basePath . '/admin');
 define('APP_NAME', 'Wallows Admin');
+define('UPLOAD_RELATIF', 'images/unggahan');
+define('UPLOAD_DIR', dirname(__DIR__, 2) . '/' . UPLOAD_RELATIF);
+define('UPLOAD_URL', BASE_PATH . '/' . UPLOAD_RELATIF);
+
+require_once __DIR__ . '/crud.php';
 
 $configPath = dirname(__DIR__, 2) . '/config/koneksi.php';
 if (!is_file($configPath)) {

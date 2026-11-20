@@ -31,18 +31,18 @@ INSERT IGNORE INTO `kategori_produk` (`id`, `nama`) VALUES
 
 -- 4. album
 INSERT INTO `album` (`id`, `judul`, `jenis`, `tahun_rilis`, `tahun_rilis_akhir`, `jumlah_lagu`, `deskripsi`, `gambar_sampul`, `tautan_spotify`) VALUES
-(1, 'Spring', 'ep', 2018, NULL, 6, 'EP debut Wallows', 'images/nothing_ep.png', NULL),
-(2, 'Nothing Happens', 'album', 2019, NULL, 10, 'Album studio pertama', 'images/nothing_happens.png', 'https://open.spotify.com/album/contoh'),
-(3, 'Remote', 'ep', 2020, NULL, 6, 'EP yang dikerjakan dari jarak jauh', NULL, NULL),
-(4, 'Tell Me That It''s Over', 'album', 2022, NULL, 10, 'Album studio kedua', NULL, NULL),
-(5, 'Model', 'album', 2024, NULL, 12, 'Album studio ketiga', NULL, NULL),
-(6, 'The Wallows Singles Collection', 'single_collection', 2017, 2023, 15, 'Kumpulan single 2017 sampai 2023', NULL, NULL);
+(1, 'Spring', 'ep', 2018, NULL, 6, 'Major-label debut EP', 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/91/18/01/91180107-9829-50a7-e5c5-002e6180c44f/075679643575.jpg/1200x1200bf-60.jpg', 'https://open.spotify.com/album/3GbofUquULdgvfmK83AXVz'),
+(2, 'Nothing Happens', 'album', 2019, NULL, 11, 'Debut studio album', 'images/dg2.jpg', 'https://open.spotify.com/album/7eed9MBclFPjjjvotfR2e9'),
+(3, 'Remote', 'ep', 2020, NULL, 6, 'Third EP release', 'https://i.pinimg.com/originals/17/6c/71/176c71b4a59eb236d15967c669ec9e48.jpg', 'https://open.spotify.com/album/0P2kTQ7mJ3z7CFjII7GWkw'),
+(4, 'Tell Me That It''s Over', 'album', 2022, NULL, 10, 'Second studio album', 'images/dg1.jpg', 'https://open.spotify.com/album/5L6fAzbz2x5oF8l0qluSKm'),
+(5, 'Model', 'album', 2024, NULL, 12, 'Third studio album', 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=1000&auto=format&fit=crop', 'https://open.spotify.com/album/64SX9Efb2JGW3rJFE1ZddJ'),
+(6, 'The Wallows Singles Collection', 'single_collection', 2017, 2023, 8, 'Popular non-album singles', 'https://i.discogs.com/CiAE1sJWKjzHq20ShOTj23lRz1rV2MFlZU9ZySvMyzg/rs:fit/g:sm/q:90/h:600/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTIyOTc2/NTczLTE3MTgwNDY3/ODYtMTYzNi5qcGVn.jpeg', 'https://open.spotify.com/album/5Jay8TPhuSdRhlogbzBVrj');
 
 -- 5. anggota
 INSERT INTO `anggota` (`id`, `nama`, `posisi`, `biodata`, `foto`) VALUES
-(1, 'Dylan Minnette', 'Vokalis dan gitar ritme', 'Anggota pendiri Wallows.', 'images/dylan.jpg'),
-(2, 'Braeden Lemasters', 'Gitaris utama dan vokalis', 'Anggota pendiri Wallows.', 'images/braeden.jpg'),
-(3, 'Cole Preston', 'Drummer', 'Anggota pendiri Wallows.', 'images/cole.jpg');
+(1, 'Dylan Minnette', 'VOCALS · RHYTHM GUITAR · KEYBOARDS', 'Dylan is the lead vocalist and rhythm guitarist of Wallows. Beyond music, he is also known as an actor, having appeared in numerous TV shows and films. Born in Evansville, Indiana, he moved to LA where he met his future bandmates.', 'images/dylan.jpg'),
+(2, 'Braeden Lemasters', 'VOCALS · LEAD GUITAR · BASS', 'Braeden handles lead guitar duties and shares vocal responsibilities with Dylan. Also an actor by trade, he brings a creative and cinematic perspective to Wallows'' songwriting and visual aesthetic.', 'images/braeden.jpg'),
+(3, 'Cole Preston', 'DRUMS · GUITAR · KEYBOARDS · BACKING VOCALS', 'Cole is the powerhouse behind the kit, providing the rhythmic backbone to Wallows'' sound. A multi-instrumentalist, he also contributes guitar and keyboard parts, making him one of the most versatile members of the group.', 'images/cole.jpg');
 
 -- 6. bagian_tur
 -- Tabel induk untuk konser.bagian_tur_id
@@ -54,9 +54,9 @@ INSERT INTO `bagian_tur` (`id`, `nama`, `tamu_khusus`) VALUES
 -- 7. jenis_tiket
 -- Tabel induk untuk tiket_konser.jenis_tiket_id
 INSERT INTO `jenis_tiket` (`id`, `nama`, `kategori`, `deskripsi`, `fasilitas`) VALUES
-(1, 'Standard', 'standard', 'Akses area umum', 'Akses area umum\nTanpa merchandise'),
-(2, 'VIP', 'vip', 'Akses area depan panggung', 'Akses area depan panggung\nMerchandise eksklusif\nMasuk lebih awal'),
-(3, 'Standard Plus', 'standard', 'Area duduk reguler', 'Kursi bernomor\nTanpa merchandise');
+(1, 'General Admission', 'standard', 'Standard entry to the floor or seating areas depending on the venue configuration.', 'Standard entry to the floor / seating\nAccess to official tour merch stand\nAccess to public concessions & bars'),
+(2, 'The "Especially You" VIP Package', 'vip', 'Early venue entry with exclusive pre-show perks and a merch bundle.', '1 General Admission ticket\nEarly venue entry\nExclusive signed poster\nExclusive Wallows tote bag\nCommemorative VIP laminate\nFirst access to tour merch'),
+(3, 'Reserved Seating', 'standard', 'Numbered seating in the regular section of the venue.', 'Numbered seat\nAccess to official tour merch stand\nAccess to public concessions & bars');
 
 -- 8. pelanggan
 -- Tabel induk untuk pesanan.pelanggan_id
@@ -81,29 +81,35 @@ INSERT INTO `lagu` (`id`, `album_id`, `judul`, `artis_tamu`, `durasi_detik`, `pe
 -- 10. lirik
 -- Satu lagu hanya boleh punya satu baris lirik (UNIQUE lagu_id)
 INSERT INTO `lirik` (`id`, `lagu_id`, `nama_bagian`, `isi_lengkap`, `tautan_genius`) VALUES
-(1, 1, 'Verse 1', 'Contoh isi lirik untuk latihan basis data.', 'https://genius.com/contoh'),
-(2, 2, 'Verse 1', 'Contoh isi lirik untuk latihan basis data.', NULL),
-(3, 3, 'Verse 1', 'Contoh isi lirik untuk latihan basis data.', NULL);
+(1, 1, 'Verse 1', 'Full lyrics for this track are not included in the sample database. Use the Genius link below to read the official lyrics.', 'https://genius.com/Wallows-are-you-bored-yet-lyrics'),
+(2, 2, 'Verse 1', 'Full lyrics for this track are not included in the sample database. Use the Genius link below to read the official lyrics.', 'https://genius.com/Wallows-pleaser-lyrics'),
+(3, 3, 'Verse 1', 'Full lyrics for this track are not included in the sample database. Use the Genius link below to read the official lyrics.', 'https://genius.com/Wallows-scrawny-lyrics');
 
 -- 11. foto
 -- kategori_foto_id mengacu ke tabel kategori_foto
 INSERT INTO `foto` (`id`, `keterangan_foto`, `lokasi_file_gambar`, `kategori_foto_id`) VALUES
-(1, 'Panggung utama saat konser', 'images/photos1.jpg', 1),
-(2, 'Suasana di belakang panggung', 'images/photos2.jpg', 2),
-(3, 'Sesi rekaman di studio', 'images/photos3.jpg', 3);
+(1, 'Live in concert', 'images/photos1.jpg', 1),
+(2, 'Crowd at a show', 'images/photos2.jpg', 1),
+(3, 'Band practice', 'images/photos3.jpg', 2),
+(4, 'Studio session', 'images/photos4.jpg', 3),
+(5, 'Live crowd', 'images/photos5.jpg', 1),
+(6, 'Stage lights', 'images/photos6.jpg', 1),
+(7, 'Backstage', 'images/photos7.jpg', 2),
+(8, 'Recording', 'images/photos8.jpg', 3);
 
 -- 12. berita
 -- admin_id mengacu ke tabel admin
 INSERT INTO `berita` (`id`, `admin_id`, `judul`, `alamat_halaman`, `isi`, `tautan_gambar`, `teks_tombol`, `tautan_tombol`, `status`, `tanggal_terbit`) VALUES
-(1, 1, 'Model Out Now', 'model-out-now', 'Album Model sudah tersedia di semua platform digital.', 'images/home2.jpg', 'Dengarkan', 'https://open.spotify.com/album/contoh', 'published', '2026-11-05 09:00:00'),
-(2, 2, 'Tur 2026 Diumumkan', 'tur-2026-diumumkan', 'Jadwal tur Model Tour 2026 sudah diumumkan.', 'images/homeimg1.jpg', 'Lihat Jadwal', 'tour/schedule.html', 'draft', '2026-11-06 09:00:00');
+(1, 1, 'Model Out Now', 'model-out-now', 'We''re so incredibly excited to share this new body of work with you. Model is available now on all streaming platforms, with physical editions on the way.', 'images/home2.jpg', 'Listen Now', 'music/albums.php', 'published', '2024-05-24 09:00:00'),
+(2, 2, 'New World Tour Dates Added', 'new-world-tour-dates-added', 'Due to overwhelming demand, we''ve added second nights in London, NYC, and Los Angeles — plus new dates in Tokyo. Tickets are on sale now.', 'images/homeimg1.jpg', 'Tour Dates', 'tour/schedule.php', 'published', '2026-03-22 09:00:00'),
+(3, 1, 'Valentine''s Day Merch Drop — Limited Edition', 'valentines-day-merch-drop', 'A special limited-edition merch drop just in time for Valentine''s Day, featuring exclusive designs available for a short time only.', 'images/home3.jpg', 'Shop Now', 'store/merchandise.php', 'published', '2026-02-14 09:00:00');
 
 -- 13. konser
 -- bagian_tur_id mengacu ke tabel bagian_tur
 INSERT INTO `konser` (`id`, `bagian_tur_id`, `nama_tempat`, `kota`, `wilayah`, `tanggal_acara`, `jam_pintu_buka`, `jam_tampil`, `batas_usia`, `catatan`, `status_penjualan`) VALUES
-(1, 3, 'Madison Square Garden', 'New York', 'New York', '2026-09-12', '18:30:00', '20:00:00', 'Semua usia', 'Pintu dibuka 90 menit sebelum acara', 'on_sale'),
-(2, 3, 'The Forum', 'Los Angeles', 'California', '2026-09-20', '18:00:00', '19:30:00', 'Semua usia', NULL, 'selling_fast'),
-(3, 2, 'O2 Academy Brixton', 'London', 'England', '2026-10-05', '19:00:00', '20:00:00', '18+', 'Wajib membawa identitas', 'presale');
+(1, 3, 'Madison Square Garden', 'New York', 'New York', '2026-09-12', '18:30:00', '20:00:00', 'All ages', 'Doors open 90 minutes before showtime', 'on_sale'),
+(2, 3, 'The Forum', 'Los Angeles', 'California', '2026-09-20', '18:00:00', '19:30:00', 'All ages', 'Doors open 90 minutes before showtime', 'selling_fast'),
+(3, 2, 'O2 Academy Brixton', 'London', 'England', '2026-10-05', '19:00:00', '20:00:00', '18+', 'Photo ID required for entry', 'presale');
 
 -- 14. tiket_konser
 -- konser_id mengacu ke konser, jenis_tiket_id mengacu ke jenis_tiket
@@ -117,11 +123,11 @@ INSERT INTO `tiket_konser` (`id`, `konser_id`, `jenis_tiket_id`, `harga`, `kuota
 -- 15. produk
 -- kategori_produk_id mengacu ke tabel kategori_produk
 INSERT INTO `produk` (`id`, `nama`, `kategori_produk_id`, `harga`, `stok`, `tautan_gambar`, `label_produk`, `status_aktif`) VALUES
-(1, 'Kaos Nothing Happens', 1, 250000.00, 40, 'images/nothing_happens.png', 'new', 1),
-(2, 'Vinyl Nothing Happens', 2, 450000.00, 25, 'images/turntable_vinyl.png', NULL, 1),
-(3, 'Poster Model Tour', 3, 120000.00, 60, NULL, 'limited', 1),
-(4, 'Tote Bag Wallows', 4, 150000.00, 80, NULL, NULL, 1),
-(5, 'Bundle Vinyl dan Kaos', 5, 650000.00, 15, NULL, NULL, 0);
+(1, 'Tell Me That It''s Over Tour Tee', 1, 250000.00, 40, 'https://media-photos.depop.com/b1/9904709/2642915748_2b41bfec7af54c8788a3a814e65c1d30/P0.jpg', 'new', 1),
+(2, 'Model Exclusive Vinyl', 2, 450000.00, 25, 'images/turntable_vinyl.png', 'limited', 1),
+(3, 'Model Tour Poster (Signed)', 3, 120000.00, 60, 'images/home4.jpg', NULL, 1),
+(4, 'Wallows Embroidered Cap', 4, 150000.00, 80, 'https://images.unsplash.com/photo-1521369909029-2afed882baee?q=80&w=1000&auto=format&fit=crop', NULL, 1),
+(5, 'Fan Bundle — Vinyl + Tee + Poster', 5, 650000.00, 15, 'https://tse4.mm.bing.net/th/id/OIP.Xr8lfexVWYVk3aXpeX3M6wHaJ4?r=0&w=1080&h=1440&rs=1&pid=ImgDetMain&o=7&rm=3', NULL, 1);
 
 -- 16. pesanan
 -- pelanggan_id boleh kosong untuk pembeli tanpa akun
@@ -140,9 +146,9 @@ INSERT INTO `item_pesanan` (`id`, `pesanan_id`, `produk_id`, `tiket_konser_id`, 
 -- 18. video
 -- lagu_id boleh kosong jika video tidak terikat lagu tertentu
 INSERT INTO `video` (`id`, `lagu_id`, `judul`, `kode_youtube`) VALUES
-(1, 1, 'Are You Bored Yet? (Official Video)', 'contohvideo'),
-(2, 5, 'Wish Me Luck (Official Video)', 'contohklip1'),
-(3, 7, 'Calling After Me (Official Video)', 'contohklip2');
+(1, 1, 'Are You Bored Yet? (Official Video)', 'wIgmyE5Juzw'),
+(2, 2, 'Pleaser (Official Video)', 'fUU0xHiW2_0'),
+(3, 3, 'Scrawny (Official Video)', 'zgOR698RMLY');
 
 -- 19. pesan_kontak
 -- dibalas_oleh mengacu ke tabel admin dan boleh kosong

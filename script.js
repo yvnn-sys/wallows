@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 3. Active Nav Link (Polished)
-    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const currentPath = window.location.pathname.split("/").pop() || "index.php";
     document.querySelectorAll(".nav-links > li").forEach(li => {
         const parentLink = li.querySelector("a");
         const allLinks = li.querySelectorAll("a");
@@ -75,6 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }, observerOptions);
 
             fadeElements.forEach(el => fadeObserver.observe(el));
+
+            // Jaring pengaman: kalau observer belum sempat jalan, konten tetap ditampilkan.
+            window.setTimeout(() => {
+                fadeElements.forEach(el => el.classList.add("visible"));
+            }, 1200);
         } else {
             fadeElements.forEach(el => el.classList.add("visible"));
         }
@@ -164,7 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const checkoutFormContainer = document.getElementById("checkout-form-container");
         const checkoutSuccess = document.getElementById("checkout-success");
         const successEmail = document.getElementById("success-email");
+        const successOrderNumber = document.getElementById("success-order-number");
         const successCloseBtn = document.getElementById("success-close-btn");
+        const checkoutError = document.getElementById("checkout-error");
 
         const modalProductTitle = document.getElementById("modal-product-title");
         const modalProductPrice = document.getElementById("modal-product-price");
@@ -190,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let activeTicketPackages = null;
         let unitPrice = 0;
-        const formatPrice = (value) => "$" + value.toFixed(2);
+        const formatPrice = (value) => "Rp " + Math.round(value).toLocaleString("id-ID");
         const updateTotal = () => {
             const qty = Math.max(1, parseInt(quantityInput.value, 10) || 1);
             modalProductPrice.textContent = formatPrice(unitPrice * qty);
@@ -286,6 +293,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             checkoutFormContainer.style.display = "block";
             checkoutSuccess.style.display = "none";
+            if (successOrderNumber) successOrderNumber.textContent = "-";
+            if (checkoutError) {
+                checkoutError.textContent = "";
+                checkoutError.style.display = "none";
+            }
 
             modal.classList.add("active");
             document.body.style.overflow = "hidden"; // Prevent background scroll
@@ -357,42 +369,53 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Handle form submit (tahap backend: kirim FormData ke endpoint pembuatan pesanan)
-        checkoutForm.addEventListener("submit", (e) => {
+        checkoutForm.addEventListener("submit", async (e) => {
             e.preventDefault();
-            successEmail.textContent = document.getElementById("checkout-email").value;
 
-            checkoutFormContainer.style.display = "none";
-            checkoutSuccess.style.display = "block";
+            if (checkoutError) {
+                checkoutError.textContent = "";
+                checkoutError.style.display = "none";
+            }
+
+            const tombolKirim = checkoutForm.querySelector('button[type="submit"]');
+            const labelTombol = tombolKirim ? tombolKirim.textContent : "";
+
+            if (tombolKirim) {
+                tombolKirim.disabled = true;
+                tombolKirim.textContent = "Processing...";
+            }
+
+            try {
+                const response = await fetch(checkoutForm.action, {
+                    method: "POST",
+                    body: new FormData(checkoutForm),
+                    headers: { "X-Requested-With": "XMLHttpRequest" }
+                });
+                const hasil = await response.json().catch(() => null);
+
+                if (!response.ok || !hasil || !hasil.ok) {
+                    throw new Error((hasil && hasil.message) || "Pesanan gagal diproses. Silakan coba lagi.");
+                }
+
+                successEmail.textContent = document.getElementById("checkout-email").value;
+                if (successOrderNumber) successOrderNumber.textContent = hasil.nomor_pesanan;
+                checkoutFormContainer.style.display = "none";
+                checkoutSuccess.style.display = "block";
+            } catch (error) {
+                if (checkoutError) {
+                    checkoutError.textContent = error instanceof Error ? error.message : "Pesanan gagal diproses.";
+                    checkoutError.style.display = "block";
+                }
+            } finally {
+                if (tombolKirim) {
+                    tombolKirim.disabled = false;
+                    tombolKirim.textContent = labelTombol;
+                }
+            }
         });
     }
 
-    // 7. Contact Page Fan Message Form
-    const contactForm = document.getElementById("contact-form");
-    if (contactForm) {
-        const contactSuccess = document.getElementById("contact-form-success");
-        const contactSuccessEmail = document.getElementById("contact-success-email");
-        const contactSuccessCloseBtn = document.getElementById("contact-success-close-btn");
-
-        contactForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const emailInput = document.getElementById("contact-email").value;
-            contactSuccessEmail.textContent = emailInput;
-
-            contactForm.style.display = "none";
-            contactSuccess.style.display = "block";
-        });
-
-        if (contactSuccessCloseBtn) {
-            contactSuccessCloseBtn.addEventListener("click", () => {
-                contactForm.reset();
-                contactForm.style.display = "block";
-                contactSuccess.style.display = "none";
-            });
-        }
-    }
-
-    // 8. Mode show-only saat datang dari schedule
+    // 7. Mode show-only saat datang dari schedule
     const showSlug = new URLSearchParams(window.location.search).get("show");
     const showCard = showSlug ? document.getElementById(showSlug) : null;
     const validShowCard = showCard && showCard.classList.contains("ticket-card") ? showCard : null;
@@ -434,7 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 9. Filter kategori untuk galeri foto dan toko
+    // 8. Filter kategori untuk galeri foto dan toko
     document.querySelectorAll("[data-category-filter]").forEach(filterBar => {
         const targetSelector = filterBar.getAttribute("data-target");
         const grid = targetSelector ? document.querySelector(targetSelector) : null;
@@ -500,7 +523,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 10. Modal lirik lengkap
+    // 9. Modal lirik lengkap
     const lyricsModal = document.getElementById("lyrics-modal");
 
     if (lyricsModal) {

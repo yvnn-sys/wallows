@@ -44,7 +44,7 @@ $produkPilihan = db_semua(
 );
 
 $pilihanStatus = pilihan_status_pesanan();
-$bisaUbahItem = $pesanan['status'] !== 'cancelled';
+$bisaUbahItem = !in_array((string) $pesanan['status'], ['cancelled', 'shipped', 'completed'], true);
 $sukses = flash_get('sukses');
 $gagal = flash_get('gagal');
 
@@ -145,7 +145,7 @@ require __DIR__ . '/../../includes/header.php';
                                     </td>
                                     <td class="text-end"><?= e(usd($baris['harga_satuan'])) ?></td>
                                     <td class="text-center">
-                                        <?php if ($bisaUbahItem): ?>
+                                        <?php if ($bisaUbahItem && $baris['tiket_konser_id'] === null): ?>
                                             <form method="post" action="item_proses.php" class="d-flex justify-content-center gap-1">
                                                 <?= csrf_field() ?>
                                                 <input type="hidden" name="aksi" value="ubah">
@@ -156,6 +156,9 @@ require __DIR__ . '/../../includes/header.php';
                                             </form>
                                         <?php else: ?>
                                             <?= (int) $baris['jumlah'] ?>
+                                            <?php if (!empty($baris['kode_tiket'])): ?>
+                                                <div class="small text-secondary">Satu kode per baris</div>
+                                            <?php endif; ?>
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-end"><?= e(usd((float) $baris['harga_satuan'] * (int) $baris['jumlah'])) ?></td>
@@ -220,9 +223,9 @@ require __DIR__ . '/../../includes/header.php';
                     </form>
                 </div>
             <?php else: ?>
-                <div class="card-footer text-secondary small">
-                    Item tidak dapat diubah karena pesanan sudah dibatalkan.
-                </div>
+                    <div class="card-footer text-secondary small">
+                        Item tidak dapat diubah karena pesanan sudah dibatalkan, dikirim, atau selesai.
+                    </div>
             <?php endif; ?>
         </div>
     </div>
@@ -251,7 +254,7 @@ require __DIR__ . '/../../includes/header.php';
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                        <div class="form-text">Status Dibatalkan akan mengembalikan stok produk secara otomatis.</div>
+                        <div class="form-text">Status Dibatalkan akan mengembalikan stok produk dan kuota tiket secara otomatis.</div>
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">

@@ -33,8 +33,11 @@ if ($aksi === null) {
     redirect($detailUrl);
 }
 
-if ($pesanan['status'] === 'cancelled') {
-    flash_set('gagal', 'Pesanan yang sudah dibatalkan tidak bisa diubah itemnya.');
+if (in_array((string) $pesanan['status'], ['cancelled', 'shipped', 'completed'], true)) {
+    $pesanTerkunci = $pesanan['status'] === 'cancelled'
+        ? 'Pesanan yang sudah dibatalkan tidak bisa diubah itemnya.'
+        : 'Pesanan yang sudah dikirim atau selesai tidak bisa diubah itemnya.';
+    flash_set('gagal', $pesanTerkunci);
     redirect($detailUrl);
 }
 
@@ -47,10 +50,12 @@ $koneksi->begin_transaction();
 try {
     if ($aksi === 'tambah') {
         $produkId = input_int('produk_id');
-        $produk = $produkId > 0 ? db_satu($koneksi, 'SELECT id, nama, harga FROM produk WHERE id = ?', [$produkId]) : null;
+        $produk = $produkId > 0
+            ? db_satu($koneksi, 'SELECT id, nama, harga FROM produk WHERE id = ? AND status_aktif = 1', [$produkId])
+            : null;
 
         if ($produk === null) {
-            throw new RuntimeException('Produk tidak ditemukan.');
+            throw new RuntimeException('Produk tidak ditemukan atau sudah tidak aktif.');
         }
 
         sesuaikan_pemakaian_item($koneksi, (int) $produk['id'], null, $jumlah);
@@ -82,6 +87,15 @@ try {
         $selisih = $jumlah - (int) $item['jumlah'];
         $produkId = $item['produk_id'] !== null ? (int) $item['produk_id'] : null;
         $tiketId = $item['tiket_konser_id'] !== null ? (int) $item['tiket_konser_id'] : null;
+
+        // Satu baris tiket mewakili satu kode_tiket, jadi jumlahnya tidak boleh ditambah.
+        // Pengurangan tetap diizinkan untuk memperbaiki data lama yang jumlahnya lebih dari 1.
+        if ($tiketId !== null && $selisih > 0) {
+            throw new RuntimeException(
+                'Jumlah tiket tidak bisa ditambah. Satu baris tiket mewakili satu kode tiket; '
+                . 'hapus baris ini lalu buat pesanan baru bila tiket tambahan diperlukan.'
+            );
+        }
 
         sesuaikan_pemakaian_item($koneksi, $produkId, $tiketId, $selisih);
 

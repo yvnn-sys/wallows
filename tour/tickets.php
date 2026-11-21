@@ -154,8 +154,15 @@ require __DIR__ . '/../includes/header.php';
                 <?php
                 $tiketStandard = null;
                 $tiketVip = null;
+                $adaKuotaTersisa = false;
 
                 foreach ($konser['daftar_tiket'] as $tiket) {
+                    if ((int) $tiket['kuota'] - (int) $tiket['terjual'] <= 0) {
+                        continue;
+                    }
+
+                    $adaKuotaTersisa = true;
+
                     if ($tiket['jenis_kategori'] === 'vip' && $tiketVip === null) {
                         $tiketVip = $tiket;
                     } elseif ($tiket['jenis_kategori'] === 'standard' && $tiketStandard === null) {
@@ -164,7 +171,12 @@ require __DIR__ . '/../includes/header.php';
                 }
 
                 [$labelStatus, $kelasStatus] = $petaStatus[$konser['status_penjualan']] ?? ['On Sale', 'on-sale'];
-                $sudahHabis = $konser['status_penjualan'] === 'sold_out';
+                $sudahHabis = $konser['status_penjualan'] === 'sold_out'
+                    || ($konser['daftar_tiket'] !== [] && !$adaKuotaTersisa);
+
+                if ($sudahHabis && $konser['status_penjualan'] !== 'sold_out') {
+                    [$labelStatus, $kelasStatus] = $petaStatus['sold_out'];
+                }
 
                 $jenisTersedia = [];
                 if ($tiketStandard !== null) {

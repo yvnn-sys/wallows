@@ -133,7 +133,8 @@ try {
         $total = round($harga * $jumlah, 2);
     } else {
         $stmt = $koneksi->prepare(
-            'SELECT tk.id, tk.harga, tk.kuota, tk.terjual, jt.nama AS jenis_nama, k.nama_tempat
+            'SELECT tk.id, tk.harga, tk.kuota, tk.terjual, jt.nama AS jenis_nama, k.nama_tempat,
+                    k.status_penjualan
              FROM tiket_konser tk
              JOIN jenis_tiket jt ON jt.id = tk.jenis_tiket_id
              JOIN konser k ON k.id = tk.konser_id
@@ -147,6 +148,10 @@ try {
 
         if ($tiket === null) {
             throw new DomainException('Tiket yang dipilih tidak ditemukan.');
+        }
+
+        if ((string) $tiket['status_penjualan'] === 'sold_out') {
+            throw new DomainException('Penjualan tiket untuk konser ini sudah ditutup.');
         }
 
         $sisa = (int) $tiket['kuota'] - (int) $tiket['terjual'];

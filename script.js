@@ -263,7 +263,10 @@ document.addEventListener("DOMContentLoaded", () => {
             standardPackageOption.classList.toggle("disabled", !packages.standard.ticketId);
             vipPackageOption.classList.toggle("disabled", !hasVip);
 
-            standardPackageRadio.checked = true;
+            // Pilih paket pertama yang tersedia agar tidak mengirim ticket_id kosong
+            // ketika salah satu jenis tiket sudah habis.
+            standardPackageRadio.checked = Boolean(packages.standard.ticketId);
+            vipPackageRadio.checked = hasVip && !packages.standard.ticketId;
             packageGroup.style.display = "block";
             syncPackageChoice();
         };

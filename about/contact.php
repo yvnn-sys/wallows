@@ -27,14 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nilai['topik'] = is_scalar($_POST['topic'] ?? null) ? trim((string) $_POST['topic']) : '';
     $nilai['pesan'] = is_scalar($_POST['message'] ?? null) ? trim((string) $_POST['message']) : '';
 
-    if ($nilai['nama'] === '') {
+    if (!csrf_valid(is_string($_POST['csrf_token'] ?? null) ? $_POST['csrf_token'] : null)) {
+        $pesanError = 'Your session expired. Please reload the page and try again.';
+    } elseif ($nilai['nama'] === '') {
         $pesanError = 'Please fill in your name.';
-    } elseif (!filter_var($nilai['email'], FILTER_VALIDATE_EMAIL)) {
+    } elseif (panjang_teks($nilai['nama']) > 100) {
+        $pesanError = 'Your name must be 100 characters or fewer.';
+    } elseif (!filter_var($nilai['email'], FILTER_VALIDATE_EMAIL) || panjang_teks($nilai['email']) > 150) {
         $pesanError = 'Please fill in a valid email address.';
     } elseif (!isset($pilihanTopik[$nilai['topik']])) {
         $pesanError = 'Please choose a topic.';
     } elseif ($nilai['pesan'] === '') {
         $pesanError = 'Please write your message.';
+    } elseif (panjang_teks($nilai['pesan']) > 2000) {
+        $pesanError = 'Your message must be 2000 characters or fewer.';
     } else {
         $nama = $nilai['nama'];
         $email = $nilai['email'];
@@ -82,6 +88,7 @@ require __DIR__ . '/../includes/header.php';
                 <?php endif; ?>
 
                 <form id="contact-form" class="modern-contact-form" action="<?= e(url_halaman('about/contact.php')) ?>" method="post">
+                    <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>">
                     <div class="form-row-2">
                         <div class="form-group-modern">
                             <input type="text" id="contact-name" name="name" maxlength="100" class="form-control-modern" placeholder="Name" value="<?= e($nilai['nama']) ?>" required>

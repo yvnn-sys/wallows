@@ -6,12 +6,19 @@ $deskripsiHalaman = 'Tour schedule and show details for Wallows.';
 
 $daftarKonser = ambil_semua(
     $koneksi,
-    'SELECT k.id, k.nama_tempat, k.kota, k.wilayah, k.tanggal_acara, k.jam_pintu_buka, k.jam_tampil,
-            k.batas_usia, k.catatan, k.status_penjualan,
-            b.id AS bagian_id, b.nama AS bagian_nama, b.tamu_khusus
-     FROM konser k
-     JOIN bagian_tur b ON b.id = k.bagian_tur_id
-     ORDER BY k.tanggal_acara ASC, k.id ASC'
+'SELECT k.id, k.nama_tempat, k.kota, k.wilayah, k.tanggal_acara, k.jam_pintu_buka, k.jam_tampil,
+        k.batas_usia, k.catatan, k.status_penjualan,
+        b.id AS bagian_id, b.nama AS bagian_nama, b.tamu_khusus,
+        COALESCE(tk.total_kuota, 0) AS total_kuota,
+        COALESCE(tk.total_terjual, 0) AS total_terjual
+ FROM konser k
+ JOIN bagian_tur b ON b.id = k.bagian_tur_id
+ LEFT JOIN (
+     SELECT konser_id, SUM(kuota) AS total_kuota, SUM(terjual) AS total_terjual
+     FROM tiket_konser
+     GROUP BY konser_id
+ ) tk ON tk.konser_id = k.id
+ ORDER BY k.tanggal_acara ASC, k.id ASC'
 );
 
 $daftarLeg = [];
@@ -84,7 +91,9 @@ require __DIR__ . '/../includes/header.php';
                 <?php foreach ($leg['daftar_konser'] as $konser): ?>
                     <?php
                     $slugKonser = 'konser-' . (int) $konser['id'];
-                    $sudahHabis = $konser['status_penjualan'] === 'sold_out';
+                    $kuotaTersisa = (int) $konser['total_kuota'] - (int) $konser['total_terjual'];
+                    $sudahHabis = $konser['status_penjualan'] === 'sold_out'
+                        || ((int) $konser['total_kuota'] > 0 && $kuotaTersisa <= 0);
 
                     $keteranganWaktu = 'Doors: ' . format_tanggal($konser['jam_pintu_buka'], 'g:i A')
                         . ' | Show: ' . format_tanggal($konser['jam_tampil'], 'g:i A');

@@ -167,6 +167,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             case 'hapus_konser':
                 $id = (int) ($_POST['id'] ?? 0);
+
+                // Jangan hapus konser yang tiketnya sudah tercatat di pesanan.
+                // FK tiket_konser -> konser memakai ON DELETE CASCADE, lalu
+                // item_pesanan.tiket_konser_id memakai ON DELETE SET NULL, sehingga
+                // riwayat tiket pada pesanan akan kehilangan referensi.
+                $stmt = $koneksi->prepare(
+                    'SELECT COUNT(*) AS jumlah
+                     FROM item_pesanan ip
+                     JOIN tiket_konser tk ON tk.id = ip.tiket_konser_id
+                     WHERE tk.konser_id = ?'
+                );
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $jumlahItemKonser = (int) ($stmt->get_result()->fetch_assoc()['jumlah'] ?? 0);
+                $stmt->close();
+
+                if ($jumlahItemKonser > 0) {
+                    flash_set(
+                        'error',
+                        'Konser tidak bisa dihapus karena ' . $jumlahItemKonser
+                        . ' tiketnya sudah tercatat pada pesanan. Hapus pesanan terkait terlebih dahulu.'
+                    );
+                    break;
+                }
+
                 $stmt = $koneksi->prepare('DELETE FROM konser WHERE id = ?');
                 $stmt->bind_param('i', $id);
                 $stmt->execute();
@@ -250,6 +275,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 }
 
+                if ($id > 0) {
+                    $stmt = $koneksi->prepare('SELECT konser_id FROM tiket_konser WHERE id = ? LIMIT 1');
+                    $stmt->bind_param('i', $id);
+                    $stmt->execute();
+                    $tiketLama = $stmt->get_result()->fetch_assoc();
+                    $stmt->close();
+
+                    if ($tiketLama === null) {
+                        flash_set('error', 'Data tiket tidak ditemukan.');
+                        break;
+                    }
+
+                    $stmt = $koneksi->prepare('SELECT COUNT(*) AS jumlah FROM item_pesanan WHERE tiket_konser_id = ?');
+                    $stmt->bind_param('i', $id);
+                    $stmt->execute();
+                    $jumlahRiwayat = (int) ($stmt->get_result()->fetch_assoc()['jumlah'] ?? 0);
+                    $stmt->close();
+
+                    // Memindahkan tiket yang sudah terjual ke konser lain akan membuat
+                    // riwayat pesanan menunjuk tiket yang salah.
+                    if ($jumlahRiwayat > 0 && $konserId !== (int) $tiketLama['konser_id']) {
+                        flash_set(
+                            'error',
+                            'Konser tiket tidak bisa diubah karena tiket ini sudah tercatat pada '
+                            . $jumlahRiwayat . ' item pesanan.'
+                        );
+                        break;
+                    }
+
+                    // terjual tidak boleh lebih kecil dari tiket pada pesanan aktif, agar
+                    // sisa kuota yang dipakai checkout tidak melebihi kenyataan.
+                    $stmt = $koneksi->prepare(
+                        "SELECT COALESCE(SUM(ip.jumlah), 0) AS jumlah
+                         FROM item_pesanan ip
+                         JOIN pesanan ps ON ps.id = ip.pesanan_id
+                         WHERE ip.tiket_konser_id = ? AND ps.status <> 'cancelled'"
+                    );
+                    $stmt->bind_param('i', $id);
+                    $stmt->execute();
+                    $terjualPesanan = (int) ($stmt->get_result()->fetch_assoc()['jumlah'] ?? 0);
+                    $stmt->close();
+
+                    if ($terjual < $terjualPesanan) {
+                        flash_set(
+                            'error',
+                            'Jumlah terjual tidak boleh lebih kecil dari ' . $terjualPesanan
+                            . ' tiket pada pesanan aktif.'
+                        );
+                        break;
+                    }
+                }
+
                 $stmt = $koneksi->prepare(
                     'SELECT COUNT(*) AS jumlah FROM tiket_konser WHERE konser_id = ? AND jenis_tiket_id = ? AND id <> ?'
                 );
@@ -281,6 +358,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             case 'hapus_tiket':
                 $id = (int) ($_POST['id'] ?? 0);
+
+                // item_pesanan.tiket_konser_id memakai ON DELETE SET NULL, jadi
+                // menghapus tiket yang sudah terjual akan memutus riwayat pesanan.
+                $stmt = $koneksi->prepare('SELECT COUNT(*) AS jumlah FROM item_pesanan WHERE tiket_konser_id = ?');
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $jumlahItemTiket = (int) ($stmt->get_result()->fetch_assoc()['jumlah'] ?? 0);
+                $stmt->close();
+
+                if ($jumlahItemTiket > 0) {
+                    flash_set(
+                        'error',
+                        'Data tiket tidak bisa dihapus karena sudah tercatat pada ' . $jumlahItemTiket
+                        . ' item pesanan.'
+                    );
+                    break;
+                }
+
                 $stmt = $koneksi->prepare('DELETE FROM tiket_konser WHERE id = ?');
                 $stmt->bind_param('i', $id);
                 $stmt->execute();
